@@ -1,10 +1,10 @@
 from setuptools import setup
 
 setup(
-    name='html_lib',
+    name='phtml',
     version='0.1.0',
     author='Andrew Cobb',
     author_email='aecobb53@gmail.com',
     description='Manages an html file in python form',
-    url='https://github.com/aecobb53/html_lib',
+    url='https://github.com/aecobb53/phtml',
 )
