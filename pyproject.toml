@@ -5,7 +5,7 @@ description = 'Manages an html file in python form'
 authors = [
     {name = "Andrew Cobb", email = "aecobb53@gmail.com"}
 ]
-license = "LICENSE"
+license = {file = "LICENSE"}
 readme = "README.md"
 requires-python = ">=3.6"
 
