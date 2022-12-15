@@ -1,26 +1,26 @@
 from phtml.classes.base import Base
 
 
-class Link(Base):
+class HyperLink(Base):
     def __init__(
         self,
-        download=None,
+        crossorigin=None,
         href=None,
         hreflang=None,
         media=None,
-        ping=None,
         referrerpolicy=None,
         rel=None,
-        target=None,
+        sizes=None,
+        title=None,
         type=None,
     ):
         super().__init__()
-        self.start_string = 'a'
-        self.end_string = 'a'
+        self.start_string = 'link'
+        self.end_string = 'link'
         self.attributes['href'] = '#'
 
-        if download is not None:
-            self.attributes['download'] = download
+        if crossorigin is not None:
+            self.attributes['crossorigin'] = crossorigin
 
         if href is not None:
             self.attributes['href'] = href
@@ -31,17 +31,17 @@ class Link(Base):
         if media is not None:
             self.attributes['media'] = media
 
-        if ping is not None:
-            self.attributes['ping'] = ping
-
         if referrerpolicy is not None:
             self.attributes['referrerpolicy'] = referrerpolicy
 
         if rel is not None:
             self.attributes['rel'] = rel
 
-        if target is not None:
-            self.attributes['target'] = target
+        if sizes is not None:
+            self.attributes['sizes'] = sizes
+
+        if title is not None:
+            self.attributes['title'] = title
 
         if type is not None:
             self.attributes['type'] = type

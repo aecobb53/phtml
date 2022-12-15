@@ -8,6 +8,7 @@ from .html_list import (
 )
 from .image import Image
 from .link import Link
+from .hyper_link import HyperLink
 from .paragraph import Paragraph
 from .text_format import (
     TextFormat,

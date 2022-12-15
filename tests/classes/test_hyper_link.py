@@ -1,53 +1,53 @@
-from phtml.classes.link import Link
+from phtml.classes.hyper_link import HyperLink
 from unittest import TestCase
 import pytest
 
 
 def test_empty():
-    item = Link()
+    item = HyperLink()
     expected = [
-        '<a href="#">',
-        '</a>',
+        '<link href="#">',
+        '</link>',
     ]
     actual = item.return_document
     assert actual == expected
 
 def test_simple_href():
-    item = Link(href='example.com')
+    item = HyperLink(href='example.com')
     expected = [
-        '<a href="example.com">',
-        '</a>',
+        '<link href="example.com">',
+        '</link>',
     ]
     actual = item.return_document
     assert actual == expected
 
 def test_simple_class():
-    item = Link()
+    item = HyperLink()
     item.add_class(['testOne', 'testTwo'])
     expected = [
-        '<a class="testOne testTwo" href="#">',
-        '</a>',
+        '<link class="testOne testTwo" href="#">',
+        '</link>',
     ]
     actual = item.return_document
     assert actual == expected
 
 def test_simple_styles():
-    item = Link()
+    item = HyperLink()
     item.add_style(['testOne', 'testTwo'])
     expected = [
-        '<a style="testOne testTwo" href="#">',
-        '</a>',
+        '<link style="testOne testTwo" href="#">',
+        '</link>',
     ]
     actual = item.return_document
     assert actual == expected
 
 def test_href_classes_and_styles():
-    item = Link(href='example.com')
+    item = HyperLink(href='example.com')
     item.add_class(['testOne', 'testTwo'])
     item.add_style(['testOne', 'testTwo'])
     expected = [
-        '<a class="testOne testTwo" style="testOne testTwo" href="example.com">',
-        '</a>',
+        '<link class="testOne testTwo" style="testOne testTwo" href="example.com">',
+        '</link>',
     ]
     actual = item.return_document
     assert actual == expected
