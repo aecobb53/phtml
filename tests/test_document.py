@@ -27,7 +27,7 @@ import pytest
 
 def test_empty():
     doc = Document()
-    expected = '<!DOCTYPE html>\n<head>\n</head>\n<body>\n</body>'
+    expected = '<!DOCTYPE html>\n<html>\n<head>\n</head>\n<body>\n</body>\n</html>'
     actual = doc.return_document
     assert actual == expected
 

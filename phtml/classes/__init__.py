@@ -10,6 +10,7 @@ from .image import Image
 from .link import Link
 from .hyper_link import HyperLink
 from .paragraph import Paragraph
+from .title import Title
 from .text_format import (
     TextFormat,
     LineBreak,

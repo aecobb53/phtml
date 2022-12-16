@@ -24,6 +24,7 @@ class Document:
     def return_document(self):
         details = []
         details.append('<!DOCTYPE html>')
+        details.append('<html>')
         details.append('<head>')
         for line in self.create_details_list(lst=self.head):
             details.append(line)
@@ -33,8 +34,9 @@ class Document:
             details.append(line)
         if self.styles:
             for line in self.creatre_styles_list():
-                details.append(line)
+                details.append(self.indent + line)
         details.append('</body>')
+        details.append('</html>')
         return '\n'.join(details)
 
     def create_details_list(self, lst):
