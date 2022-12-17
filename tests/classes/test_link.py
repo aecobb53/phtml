@@ -1,4 +1,4 @@
-from phtml.classes.link import Link
+from phtml import Link
 from unittest import TestCase
 import pytest
 

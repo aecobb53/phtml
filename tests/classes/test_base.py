@@ -1,4 +1,4 @@
-from phtml.classes.base import Base
+from phtml import Base
 from unittest import TestCase
 import pytest
 

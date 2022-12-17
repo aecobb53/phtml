@@ -1,4 +1,4 @@
-from phtml.classes.title import Title
+from phtml import Title
 from unittest import TestCase
 import pytest
 

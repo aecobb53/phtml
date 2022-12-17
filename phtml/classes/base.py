@@ -4,7 +4,7 @@ class Base:
     def __init__(self):
         self.attributes = {
             'class': [],
-            'style': [],
+            'style': {},
         }
         self.internal = []
         self.indent = '    '
@@ -20,10 +20,17 @@ class Base:
             self.attributes['class'].append(class_obj)
 
     def add_style(self, style_obj):
-        if isinstance(style_obj, list):
-            self.attributes['style'].extend(style_obj)
-        else:
-            self.attributes['style'].append(style_obj)
+        # for key, value in style_obj.items():
+        #     self.attributes['style'][key] = value
+        self.attributes['style'].update(style_obj)
+        # if not isinstance(style_obj, list):
+        #     self.attributes['style'].extend(style_obj)
+        # else:
+        #     self.attributes['style'].append(style_obj)
+        # if isinstance(style_obj, list):
+        #     self.attributes['style'].extend(style_obj)
+        # else:
+        #     self.attributes['style'].append(style_obj)
 
     def add_internal(self, obj):
         self.internal.append(obj)
@@ -34,7 +41,18 @@ class Base:
         for attribute, att_data in self.attributes.items():
             if not att_data:
                 continue
-            if not isinstance(att_data, list):
+            if attribute == 'style':
+                # x=1
+                # a = [f'{k}: {v};' for k, v in att_data.items()]
+                # b = " ".join([f'{k}: {v};' for k, v in att_data.items()])
+                # c = f' style="{" ".join([f"{k}: {v};" for k, v in att_data.items()])}"'
+                # x=1
+                details[0] += f' style="{" ".join([f"{k}: {v};" for k, v in att_data.items()])}"'
+                # x=1
+                # for att in att_data:
+                #     for name, deets in att.items():
+                #         details[0] += f' {attribute}=""'
+            elif not isinstance(att_data, list):
                 details [0] += f' {attribute}="{att_data}"'
             else:
                 details [0] += f' {attribute}="{" ".join(att_data)}"'

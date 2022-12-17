@@ -1,4 +1,4 @@
-from phtml.classes.blockquote import Blockquote
+from phtml import Blockquote
 from unittest import TestCase
 import pytest
 
@@ -22,9 +22,9 @@ def test_simple_class():
 
 def test_simple_styles():
     item = Blockquote()
-    item.add_style(['testOne', 'testTwo'])
+    item.add_style({'testOne': 'testTwo'})
     expected = [
-        '<blockquote style="testOne testTwo">',
+        '<blockquote style="testOne: testTwo">',
         '</blockquote>',
     ]
     assert item.return_document == expected
@@ -32,9 +32,9 @@ def test_simple_styles():
 def test_classes_and_styles():
     item = Blockquote()
     item.add_class(['testOne', 'testTwo'])
-    item.add_style(['testOne', 'testTwo'])
+    item.add_style({'testOne': 'testTwo'})
     expected = [
-        '<blockquote class="testOne testTwo" style="testOne testTwo">',
+        '<blockquote class="testOne testTwo" style="testOne: testTwo">',
         '</blockquote>',
     ]
     assert item.return_document == expected

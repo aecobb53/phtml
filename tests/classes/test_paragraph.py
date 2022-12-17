@@ -1,4 +1,4 @@
-from phtml.classes.paragraph import Paragraph
+from phtml import Paragraph
 from unittest import TestCase
 import pytest
 

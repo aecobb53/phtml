@@ -1,4 +1,4 @@
-from phtml.classes.image import Image
+from phtml import Image
 from unittest import TestCase
 import pytest
 

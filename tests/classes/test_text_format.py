@@ -1,4 +1,4 @@
-from phtml.classes.text_format import (
+from phtml import (
     TextFormat,
     LineBreak,
     Bold,

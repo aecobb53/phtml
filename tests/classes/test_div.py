@@ -1,4 +1,4 @@
-from phtml.classes.div import Div
+from phtml import Div
 from unittest import TestCase
 import pytest
 

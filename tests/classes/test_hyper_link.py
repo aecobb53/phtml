@@ -1,3 +1,4 @@
+from phtml import HyperLink
 from phtml.classes.hyper_link import HyperLink
 from unittest import TestCase
 import pytest
