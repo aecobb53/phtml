@@ -33,9 +33,9 @@ def test_simple_class():
 
 def test_simple_styles():
     item = Link()
-    item.add_style(['testOne', 'testTwo'])
+    item.add_style({'testOne': 'testTwo'})
     expected = [
-        '<a style="testOne testTwo" href="#">',
+        '<a style="testOne: testTwo;" href="#">',
         '</a>',
     ]
     actual = item.return_document
@@ -44,9 +44,9 @@ def test_simple_styles():
 def test_href_classes_and_styles():
     item = Link(href='example.com')
     item.add_class(['testOne', 'testTwo'])
-    item.add_style(['testOne', 'testTwo'])
+    item.add_style({'testOne': 'testTwo'})
     expected = [
-        '<a class="testOne testTwo" style="testOne testTwo" href="example.com">',
+        '<a class="testOne testTwo" style="testOne: testTwo;" href="example.com">',
         '</a>',
     ]
     actual = item.return_document

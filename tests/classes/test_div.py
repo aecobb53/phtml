@@ -24,9 +24,9 @@ def test_simple_class():
 
 def test_simple_styles():
     item = Div()
-    item.add_style(['testOne', 'testTwo'])
+    item.add_style({'testOne': 'testTwo'})
     expected = [
-        '<div style="testOne testTwo">',
+        '<div style="testOne: testTwo;">',
         '</div>',
     ]
     actual = item.return_document
@@ -35,9 +35,9 @@ def test_simple_styles():
 def test_classes_and_styles():
     item = Div()
     item.add_class(['testOne', 'testTwo'])
-    item.add_style(['testOne', 'testTwo'])
+    item.add_style({'testOne': 'testTwo'})
     expected = [
-        '<div class="testOne testTwo" style="testOne testTwo">',
+        '<div class="testOne testTwo" style="testOne: testTwo;">',
         '</div>',
     ]
     actual = item.return_document

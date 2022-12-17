@@ -31,9 +31,9 @@ def test_simple_class():
 
 def test_simple_styles():
     item = Image()
-    item.add_style(['testOne', 'testTwo'])
+    item.add_style({'testOne': 'testTwo'})
     expected = [
-        '<img style="testOne testTwo" src="#">',
+        '<img style="testOne: testTwo;" src="#">',
     ]
     actual = item.return_document
     assert actual == expected
@@ -42,9 +42,9 @@ def test_src_classes_and_styles():
     item = Image()
     item.add_src('/images/favicon.ico')
     item.add_class(['testOne', 'testTwo'])
-    item.add_style(['testOne', 'testTwo'])
+    item.add_style({'testOne': 'testTwo'})
     expected = [
-        '<img class="testOne testTwo" style="testOne testTwo" src="/images/favicon.ico">',
+        '<img class="testOne testTwo" style="testOne: testTwo;" src="/images/favicon.ico">',
     ]
     actual = item.return_document
     assert actual == expected

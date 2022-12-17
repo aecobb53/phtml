@@ -9,7 +9,8 @@ def test_empty():
         '<blockquote>',
         '</blockquote>',
     ]
-    assert item.return_document == expected
+    actual = item.return_document
+    assert actual == expected
 
 def test_simple_class():
     item = Blockquote()
@@ -18,26 +19,29 @@ def test_simple_class():
         '<blockquote class="testOne testTwo">',
         '</blockquote>',
     ]
-    assert item.return_document == expected
+    actual = item.return_document
+    assert actual == expected
 
 def test_simple_styles():
     item = Blockquote()
     item.add_style({'testOne': 'testTwo'})
     expected = [
-        '<blockquote style="testOne: testTwo">',
+        '<blockquote style="testOne: testTwo;">',
         '</blockquote>',
     ]
-    assert item.return_document == expected
+    actual = item.return_document
+    assert actual == expected
 
 def test_classes_and_styles():
     item = Blockquote()
     item.add_class(['testOne', 'testTwo'])
     item.add_style({'testOne': 'testTwo'})
     expected = [
-        '<blockquote class="testOne testTwo" style="testOne: testTwo">',
+        '<blockquote class="testOne testTwo" style="testOne: testTwo;">',
         '</blockquote>',
     ]
-    assert item.return_document == expected
+    actual = item.return_document
+    assert actual == expected
 
 def test_simple_internal():
     item = Blockquote()
@@ -47,7 +51,8 @@ def test_simple_internal():
         '    test on the inside',
         '</blockquote>',
     ]
-    assert item.return_document == expected
+    actual = item.return_document
+    assert actual == expected
 
 def test_internal_object():
     item = Blockquote()
@@ -62,4 +67,5 @@ def test_internal_object():
         '    </blockquote>',
         '</blockquote>',
     ]
-    assert item.return_document == expected
+    actual = item.return_document
+    assert actual == expected

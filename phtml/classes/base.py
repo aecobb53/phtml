@@ -4,7 +4,7 @@ class Base:
     def __init__(self):
         self.attributes = {
             'class': [],
-            'style': {},
+            'style': [],
         }
         self.internal = []
         self.indent = '    '
@@ -20,9 +20,15 @@ class Base:
             self.attributes['class'].append(class_obj)
 
     def add_style(self, style_obj):
-        # for key, value in style_obj.items():
-        #     self.attributes['style'][key] = value
-        self.attributes['style'].update(style_obj)
+        styles = []
+        if not isinstance(style_obj, list):
+            style_obj = [style_obj]
+        for obj in style_obj:
+            self.attributes['style'].append(obj)
+            # if isinstance(style_obj, dict):
+            #     self.attributes['style'].update(style_obj)
+            # else:
+            #     self.attributes['style'].
         # if not isinstance(style_obj, list):
         #     self.attributes['style'].extend(style_obj)
         # else:
@@ -42,16 +48,14 @@ class Base:
             if not att_data:
                 continue
             if attribute == 'style':
-                # x=1
-                # a = [f'{k}: {v};' for k, v in att_data.items()]
-                # b = " ".join([f'{k}: {v};' for k, v in att_data.items()])
-                # c = f' style="{" ".join([f"{k}: {v};" for k, v in att_data.items()])}"'
-                # x=1
-                details[0] += f' style="{" ".join([f"{k}: {v};" for k, v in att_data.items()])}"'
-                # x=1
-                # for att in att_data:
-                #     for name, deets in att.items():
-                #         details[0] += f' {attribute}=""'
+                style = []
+                for att in att_data:
+                    if isinstance(att, dict):
+                        for key, value in att.items():
+                            style.append(f"{key}: {value};")
+                    else:
+                        style.append(att)
+                details[0] += f' style="{" ".join(style)}"'
             elif not isinstance(att_data, list):
                 details [0] += f' {attribute}="{att_data}"'
             else:
