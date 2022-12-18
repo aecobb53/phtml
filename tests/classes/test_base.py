@@ -8,6 +8,12 @@ def test_setup():
     # assert item.classes == []
     # assert item.styles == []
 
+def test_internal():
+    item = Base(internal='test_one')
+    expected = ['<None>', '    test_one']
+    actual = item.return_document
+    assert actual == expected
+
 # class DivTest(TestCase):
 #     def test_setup(self):
 #         d = Div()

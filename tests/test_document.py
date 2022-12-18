@@ -3,6 +3,7 @@ from phtml.classes.header import Header
 from phtml.classes.div import Div
 from phtml.classes.paragraph import Paragraph
 from phtml.classes.link import Link
+from phtml.classes.hyper_link import HyperLink
 from phtml.classes.image import Image
 from phtml.classes.blockquote import Blockquote
 from phtml.classes.html_list import HtmlList, HtmlListItem
@@ -122,6 +123,30 @@ def test_real_file():
             {'max-width': '350px'},
         ]
     })
+    content = Paragraph()
+    content.add_class('test1')
+    content.add_style({'text-block': 'centered'})
+    content.internal.append('simple string')
+    content.internal.append(123)
+    content.internal.append(Div())
+    content.internal.append(Paragraph())
+    content.internal.append(Link())
+    content.internal.append(HyperLink())
+    content.internal.append(Image())
+    content.internal.append(Blockquote())
+    content.internal.append(LineBreak())
+    content.internal.append(Bold('test'))
+    content.internal.append(Strong('test'))
+    content.internal.append(Italic('test'))
+    content.internal.append(Emphasized('test'))
+    content.internal.append(Marked('test'))
+    content.internal.append(Smaller('test'))
+    content.internal.append(Deleted('test'))
+    content.internal.append(Inserted('test'))
+    content.internal.append(Subscript('test'))
+    content.internal.append(Superscript('test'))
+    content.internal.append(Emoji('emojicode'))
+    doc.body.append(content)
 
     expected = []
     with open('tests/resources/document_actual_html_page.html', 'r') as tf:

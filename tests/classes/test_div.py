@@ -53,7 +53,7 @@ def test_simple_internal():
     ]
     actual = item.return_document
     assert actual == expected
-    
+
 def test_internal_object():
     item = Div()
     d1 = Div()
@@ -69,3 +69,21 @@ def test_internal_object():
     ]
     actual = item.return_document
     assert actual == expected
+
+def test_added_internal_stuff():
+    item = Div(internal='test_1')
+    expected = [
+        '<div>',
+        '    test_1',
+        '</div>',
+    ]
+    actual = item.return_document
+    assert actual == expected
+
+def test_return_string_version():
+    item = Div(internal='test on the inside')
+    item.add_class(['testOne', 'testTwo'])
+    item.add_style({'testOne': 'testTwo'})
+    expected = '<div class="testOne testTwo" style="testOne: testTwo;">test on the inside</div>'
+    actual = item.return_string_version
+    assert expected == actual

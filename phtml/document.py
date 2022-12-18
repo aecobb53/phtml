@@ -42,6 +42,7 @@ class Document:
     def create_details_list(self, lst):
         details = []
         for item in lst:
+            x=1
             if isinstance(item, TextFormat):
                 details.append(f"{self.indent}{item.return_content}")
             elif isinstance(item, Base):

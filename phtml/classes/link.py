@@ -13,8 +13,9 @@ class Link(Base):
         rel=None,
         target=None,
         type=None,
+        internal=None
     ):
-        super().__init__()
+        super().__init__(internal=internal)
         self.start_string = 'a'
         self.end_string = 'a'
         self.attributes['href'] = '#'

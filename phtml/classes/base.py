@@ -1,12 +1,17 @@
 from phtml.classes.text_format import TextFormat
 
 class Base:
-    def __init__(self):
+    def __init__(self, internal=None):
         self.attributes = {
             'class': [],
             'style': [],
         }
         self.internal = []
+        if internal:
+            if isinstance(internal, list):
+                self.internal.extend(internal)
+            else:
+                self.internal.append(internal)
         self.indent = '    '
         self.start_string = None
         self.end_string = None
@@ -63,15 +68,23 @@ class Base:
         details[0] += '>'
         if self.internal:
             for internal in self.internal:
-                if isinstance(internal, TextFormat):
-                    x=1
+                x=1
                 if isinstance(internal, Base):
-                    x=1
                     for item in internal.return_document:
                         details.append(self.indent + item)
-                else:
+                elif isinstance(internal, TextFormat):
                     x=1
-                    details.append(self.indent + internal)
+                    details.append(self.indent + internal.return_content)
+                else:
+                    try:
+                        details.append(self.indent + internal)
+                    except:
+                        details.append(self.indent + str(internal))
         if self.end_string:
             details.append(f'</{self.end_string}>')
         return details
+
+    @property
+    def return_string_version(self):
+        details = self.return_document
+        return ''.join([l.strip() for l in details])

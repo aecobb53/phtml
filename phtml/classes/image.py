@@ -2,8 +2,8 @@ from phtml.classes.base import Base
 
 
 class Image(Base):
-    def __init__(self):
-        super().__init__()
+    def __init__(self, internal=None):
+        super().__init__(internal=internal)
         self.start_string = 'img'
         self.end_string = False
         self.attributes['src'] = '#'

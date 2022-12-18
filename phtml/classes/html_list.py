@@ -3,8 +3,8 @@ from phtml.classes.text_format import TextFormat
 
 
 class HtmlList(Base):
-    def __init__(self, ordered=False):
-        super().__init__()
+    def __init__(self, ordered=False, internal=None):
+        super().__init__(internal=internal)
         if ordered:
             self.start_string = 'ol'
             self.end_string = 'ol'
@@ -21,7 +21,8 @@ class HtmlListItem(Base):
         list_item=None,
         list_description=None,
         term_description=None,
-        term_in_description_list=None
+        term_in_description_list=None,
+        internal=None
     ):
         super().__init__()
         self.content = content
