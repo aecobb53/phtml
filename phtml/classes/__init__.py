@@ -11,6 +11,7 @@ from .link import Link
 from .hyper_link import HyperLink
 from .paragraph import Paragraph
 from .title import Title
+from .button import Button
 from .text_format import (
     TextFormat,
     LineBreak,

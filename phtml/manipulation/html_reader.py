@@ -1,5 +1,7 @@
+from pydoc import Doc
 import re
 # from phtml import Document
+from phtml import Button
 from phtml.document import Document
 from phtml import Base
 from phtml import Blockquote
@@ -31,7 +33,6 @@ from phtml import (
 )
 
 
-
 class HtmlReader:
     def __init__(self):
         pass
@@ -44,86 +45,112 @@ class HtmlReader:
 
     def read_data(self, content, current_element=None):
         contents = []
-        content = content.replace('\n', '')
-        if content.startswith('<!DOCTYPE html>'):
-            content = content[15:]
+        remaining_content = content.replace('\n', '')
+        main_loop = False
+        if remaining_content.startswith('<!DOCTYPE html>'):
+            remaining_content = remaining_content[15:].strip()
+            main_loop = True
+        # if remaining_content.startswith('<html>'):
+        #     remaining_content = remaining_content[6:].strip()
+        # if remaining_content.endswith('</html>'):
+        #     remaining_content = remaining_content[:-7].strip()
         loop_active = True
         while loop_active:
-            loop_active, content, element = self.find_next_element(content, current_element)
+            old_content = remaining_content
+            loop_active, remaining_content, element = self.find_next_element(
+                remaining_content=remaining_content,
+                current_element=current_element
+            )
+            if main_loop:
+                x=1
+            x=1
             if element is not None:
                 contents.append(element)
             x=1
         x=1
+        if main_loop    :
+            x=1
         return contents
-        pass
 
-    def find_next_element(self, content, current_element=None):
-        if content.endswith('<br'):
-            x=1
-        match_start = re.search(r'<([a-z0-9]+) ?', content)
+    def find_next_element(self, remaining_content, current_content='', current_element=None):
+        match_start = re.search(r'<([a-z0-9]+) ?', remaining_content)
         element = None
-        try:
-            int(content)
-            x=1
-        except:
-            pass
-        # if content == '5':
-        #     x=1
         if match_start:
-            if content == '<a>':
-                x=1
             if match_start.start() > 0:
-                x=1
-                element = content[0:match_start.start()]
-                content = content[match_start.start():]
-                if content.endswith('<br'):
-                    x=1
-                return True, content, element
+                element = remaining_content[0:match_start.start()]
+                remaining_content = remaining_content[match_start.start():]
+                return True, remaining_content, element
             tag_start = match_start.groups(0)[0]
-            if tag_start == 'a':
-                x=1
+            """
+            Some tags need some massaging to be processed or just ignored
+            """
             if tag_start == 'br':
                 match_start_index = match_start.start()
                 match_end_index = match_start.end()
                 element = LineBreak()
             elif tag_start == 'link':
-                # match_end = re.search(f'/>?$', content)
-                match_end = re.search(f'/>$', content)
+                # match_end = re.search(f'/>$', content)
+                match_end = re.search(f'/?>', remaining_content)
                 match_start_index = match_start.start()
-                if match_end is None:
-                    x=1
                 match_end_index = match_end.end()
             else:
-                match_end = re.search(f'</{tag_start}', content)
+                view_window_starts = len(tag_start) + 2
+                view_window_ends = len(tag_start) + 2
+                loop = True
+                while loop:
+                    loop = False
+                    # tmp_str_start = remaining_content[view_window_starts:]
+                    # tmp_str_end = remaining_content[view_window_ends:]
+                    match_beg = re.search(f'<{tag_start}', remaining_content[view_window_starts:])
+                    match_end = re.search(f'</{tag_start}>', remaining_content[view_window_ends:])
+                    if match_beg is None:
+                        break
+                    if match_end is None:
+                        x=1
+                    if (match_beg.start() + view_window_starts) < (match_end.start() + view_window_ends):
+                        x=1
+                        view_window_starts = view_window_starts + match_beg.end()
+                        view_window_ends = view_window_ends + match_end.end()
+                        loop = True
+                        x=1
+                # match_end = re.search(f'</{tag_start}', remaining_content)
                 match_start_index = match_start.start()
-                match_end_index = match_end.end()
+                try:
+                    # match_end_index = match_end.end() + view_window_start + 1
+                    # a = remaining_content[match_end_index-10:match_end_index]
+                    # b = remaining_content[match_end_index:match_end_index+10]
+                    match_end_index = match_end.end() + view_window_ends
+                    x=1
+                except Exception as e:
+                    e
+                    match_end_index = len(content)
 
-            element_string = content[match_start_index:match_end_index]
+            """
+            Process the tag
+            """
+            current_content = remaining_content[match_start_index:match_end_index]
+            element_string = current_content
             if element is None:
                 element = self.parse_element(element_string,  tag_start, current_element)
-            start_index = max(match_start_index - 1, 0)
-            end_index = min(match_end_index + 1, len(content) - 1)
-            if content.endswith('<br'):
-                x=1
-            llll = len(content)
-            og_c = content
-            if tag_start == 'link':
-                content = content[0:start_index] + content[end_index:-1]
-            else:
-                content = content[0:start_index] + content[end_index:]
-            if content.endswith('<br'):
-                x=1
+            start_index = max(match_start_index, 0)
+            end_index = min(match_end_index, len(current_content))
+
+            """
+            Some tags need a bit more massaging after
+            """
+            # if tag_start == 'link':
+            #     remaining_content = remaining_content[0:start_index] + remaining_content[end_index:-1]
+            # else:
+            #     remaining_content = remaining_content[0:start_index] + remaining_content[end_index:]
+            remaining_content = remaining_content[0:start_index] + remaining_content[end_index:]
         else:
-            if content.endswith('<br'):
-                x=1
-            return False, None, content
-        if content.endswith('<br'):
-            x=1
-        return True, content, element
+            return False, None, remaining_content
+        return True, remaining_content, element
 
     def parse_element(self, content, tag, current_element=None):
         tags_string_start = ''
         tags_string_end = ''
+        content = re.sub(r'/ *>$', '>', content, count=1)
         for c in content:
             tags_string_start += c
             if c == '>':
@@ -211,31 +238,58 @@ class HtmlReader:
         elif tag == 'title':
             found = True
             element = Title(**tags_dict)
+        elif tag == 'button':
+            found = True
+            element = Button(**tags_dict)
+        elif tag == 'style':
+            found = True
+            element = content
+            return element
         if not found and tag not in ['head', 'body']:
             x=1
+        # if not found and tag not in ['style']:
+        #     return ''
         if tags_classes:
             [element.add_class(cl) for cl in tags_classes]
         if tags_styles:
             for key, value in tags_styles.items():
                 element.add_style({key: value})
-        contents = self.read_data(content, current_element)
+        if content:
+            contents = self.read_data(content, current_element)
+        else:
+            contents = []
+        x=1
         for content in contents:
             try:
                 if tag in ['head', 'body'] and isinstance(current_element, Document):
+                    a = 1
                     getattr(current_element, tag).append(content)
                     element = None
                 elif isinstance(element, LineBreak):
+                    a = 2
                     pass
                 else:
+                    a = 3
+                    if isinstance(element, Document):
+                        x=1
                     element.internal.append(content)
             except Exception as e:
                 e
+                # if tag == 'head':
+
+                x=1
                 element = None
         x=1
+        if tag == 'html':
+            return current_element
         return element
 
 
 h = HtmlReader()
 
-h.read_file('tests/resources/old_class_builds_for_manipulation.html')
+contents = h.read_file('tests/resources/old_class_builds_for_manipulation.html')
 
+with open('testdoc_deleteme.html', 'w') as hf:
+    hf.write(contents[0].return_document)
+
+x=1
