@@ -1,4 +1,4 @@
-from phtml.classes.text_format import TextFormat
+from .text_format import TextFormat
 
 class Base:
     def __init__(self, internal=None):

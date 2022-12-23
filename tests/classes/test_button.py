@@ -1,5 +1,4 @@
 from phtml import Button
-from unittest import TestCase
 import pytest
 
 

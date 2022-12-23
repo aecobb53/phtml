@@ -1,9 +1,6 @@
-from pydoc import Doc
 import re
-# from phtml import Document
 from phtml import Button
-from phtml.document import Document
-from phtml import Base
+from phtml import Document
 from phtml import Blockquote
 from phtml import Div
 from phtml import Header
@@ -31,6 +28,7 @@ from phtml import (
     Superscript,
     Emoji,
 )
+from phtml import Style
 
 
 class HtmlReader:
@@ -244,6 +242,10 @@ class HtmlReader:
         elif tag == 'style':
             found = True
             element = content
+            styles = self.parse_style(content)
+            x=1
+            current_element.styles.extend(styles)
+            x=1
             return element
         if not found and tag not in ['head', 'body']:
             x=1
@@ -284,12 +286,28 @@ class HtmlReader:
             return current_element
         return element
 
+    def parse_style(self, style_string):
+        style_string = re.sub(r'\/\*[a-zA-Z0-9.,{}()\[\] :;#\%-]+\*/', '', style_string) # Removing comments
+        results2 = style_string.split('}')
+        styles = []
+        for item in results2:
+            kv = item.split('{')
+            name = kv[0].strip()
+            style = {}
+            for kv in kv[-1].split(';'):
+                if kv == '':
+                    continue
+                key, value = kv.split(':')
+                style[key] = value
+            styles.append(Style(name=name, style_details=style))
+        return styles
 
-h = HtmlReader()
 
-contents = h.read_file('tests/resources/old_class_builds_for_manipulation.html')
+# h = HtmlReader()
 
-with open('testdoc_deleteme.html', 'w') as hf:
-    hf.write(contents[0].return_document)
+# contents = h.read_file('tests/resources/old_class_builds_for_manipulation.html')
 
-x=1
+# with open('testdoc_deleteme.html', 'w') as hf:
+#     hf.write(contents[0].return_document)
+
+# x=1

@@ -1,5 +1,6 @@
 from phtml.classes.base import Base
 from phtml.classes.text_format import TextFormat
+from phtml.classes.style import Style
 from phtml.classes.html_list import HtmlList, HtmlListItem
 
 class Document:
@@ -34,7 +35,7 @@ class Document:
             details.append(line)
         if self.styles:
             for line in self.creatre_styles_list():
-                details.append(self.indent + line)
+                details.append(f"{self.indent}{line}")
         details.append('</body>')
         details.append('</html>')
         return '\n'.join(details)
@@ -55,23 +56,30 @@ class Document:
     def creatre_styles_list(self):
         details = []
         details.append('<style>')
-        for class_obj in self.styles:
-            for class_name, class_details in class_obj.items():
-                style = [f'{self.indent}{class_name} ' + '{']
-                deets = []
-                if isinstance(class_details, list):
-                    for cd in class_details:
-                        deets.extend([f"{k}: {v};" for k, v in cd.items()])
-                else:
-                    deets.extend([f"{k}: {v};" for k, v in class_details.items()])
-                if len(deets) < 1:
-                    style[0] += '}'
-                if len(deets) == 1:
-                    style[0] += deets[0] + '}'
-                else:
-                    style.extend([f"{self.indent * 2}{d}" for d in deets])
-                    style.append(self.indent + '}')
-                details.extend(style)
+        for style in self.styles:
+            if not isinstance(style, Style):
+                details.append(style)
+                continue
+            for line in style.return_content:
+                details.append(f"{self.indent}{line}")
+            # details.append(style.return_content)
+        # for class_obj in self.styles:
+        #     for class_name, class_details in class_obj.items():
+        #         style = [f'{self.indent}{class_name} ' + '{']
+        #         deets = []
+        #         if isinstance(class_details, list):
+        #             for cd in class_details:
+        #                 deets.extend([f"{k}: {v};" for k, v in cd.items()])
+        #         else:
+        #             deets.extend([f"{k}: {v};" for k, v in class_details.items()])
+        #         if len(deets) < 1:
+        #             style[0] += '}'
+        #         if len(deets) == 1:
+        #             style[0] += deets[0] + '}'
+        #         else:
+        #             style.extend([f"{self.indent * 2}{d}" for d in deets])
+        #             style.append(self.indent + '}')
+        #         details.extend(style)
         details.append('</style>')
         return details
 

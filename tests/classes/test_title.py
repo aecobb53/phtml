@@ -1,5 +1,4 @@
 from phtml import Title
-from unittest import TestCase
 import pytest
 
 

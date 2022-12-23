@@ -1,5 +1,4 @@
 from phtml import Blockquote
-from unittest import TestCase
 import pytest
 
 

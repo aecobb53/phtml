@@ -1,5 +1,5 @@
 from phtml.classes.base import Base
-from phtml.classes.text_format import TextFormat
+from .text_format import TextFormat
 
 
 class HtmlList(Base):

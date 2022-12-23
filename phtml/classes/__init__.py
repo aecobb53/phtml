@@ -1,4 +1,4 @@
-from .base import Base
+from phtml.classes.base import Base
 from .blockquote import Blockquote
 from .div import Div
 from .header import Header
@@ -27,3 +27,4 @@ from .text_format import (
     Superscript,
     Emoji,
 )
+from .style import Style

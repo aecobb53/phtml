@@ -74,84 +74,84 @@ def test_simple_objects():
     actual = doc.return_document
     assert actual == expected
 
-def test_styles():
-    doc = Document()
-    div = Div()
-    div.add_class('class1')
-    div.add_class('class2')
-    div.add_class('class3')
-    doc.body.append(div)
+# def test_styles():
+#     doc = Document()
+#     div = Div()
+#     div.add_class('class1')
+#     div.add_class('class2')
+#     div.add_class('class3')
+#     doc.body.append(div)
 
-    doc.styles.append({'class1': {'display': 'inline-block'}})
-    doc.styles.append({'class2': [
-        {'border-style': 'solid'},
-    ]})
-    doc.styles.append({'class3': [
-        {'min-width': '300px'},
-        {'max-width': '350px'},
-    ]})
-    expected = []
-    with open('tests/resources/document_styles.html', 'r') as tf:
-        for line in tf.readlines():
-            expected.append(line)
-    expected = "".join(expected)
-    actual = doc.return_document
-    assert actual == expected
+#     doc.styles.append({'class1': {'display': 'inline-block'}})
+#     doc.styles.append({'class2': [
+#         {'border-style': 'solid'},
+#     ]})
+#     doc.styles.append({'class3': [
+#         {'min-width': '300px'},
+#         {'max-width': '350px'},
+#     ]})
+#     expected = []
+#     with open('tests/resources/document_styles.html', 'r') as tf:
+#         for line in tf.readlines():
+#             expected.append(line)
+#     expected = "".join(expected)
+#     actual = doc.return_document
+#     assert actual == expected
 
-def test_real_file():
-    doc = Document()
-    doc.body.append(Header(1, 'Example File'))
-    doc.body.append(Header(2, 'Content header'))
+# def test_real_file():
+#     doc = Document()
+#     doc.body.append(Header(1, 'Example File'))
+#     doc.body.append(Header(2, 'Content header'))
 
-    main_div = Div()
-    color_list_1 = ['red', 'green', 'blue', 'purple', 'cyan']
-    color_list_2 = ['lightcoral', 'cyan', 'red', 'green', 'purple']
-    for index in range(5):
-        div = Div()
-        div.internal.append(f"Some content {index}")
-        div.add_style(f'background-color: {color_list_1[index]};')
-        div.add_style(f'color: {color_list_2[index]};')
-        div.add_class('class1')
-        div.add_class('class2')
-        main_div.internal.append(div)
-    doc.body.append(main_div)
-    doc.styles.append({
-        'class1': [{'border-style': 'solid'}],
-        'class2': [
-            {'display': 'inline-block'},
-            {'min-width': '300px'},
-            {'max-width': '350px'},
-        ]
-    })
-    content = Paragraph()
-    content.add_class('test1')
-    content.add_style({'text-block': 'centered'})
-    content.internal.append('simple string')
-    content.internal.append(123)
-    content.internal.append(Div())
-    content.internal.append(Paragraph())
-    content.internal.append(Link())
-    content.internal.append(HyperLink())
-    content.internal.append(Image())
-    content.internal.append(Blockquote())
-    content.internal.append(LineBreak())
-    content.internal.append(Bold('test'))
-    content.internal.append(Strong('test'))
-    content.internal.append(Italic('test'))
-    content.internal.append(Emphasized('test'))
-    content.internal.append(Marked('test'))
-    content.internal.append(Smaller('test'))
-    content.internal.append(Deleted('test'))
-    content.internal.append(Inserted('test'))
-    content.internal.append(Subscript('test'))
-    content.internal.append(Superscript('test'))
-    content.internal.append(Emoji('emojicode'))
-    doc.body.append(content)
+#     main_div = Div()
+#     color_list_1 = ['red', 'green', 'blue', 'purple', 'cyan']
+#     color_list_2 = ['lightcoral', 'cyan', 'red', 'green', 'purple']
+#     for index in range(5):
+#         div = Div()
+#         div.internal.append(f"Some content {index}")
+#         div.add_style(f'background-color: {color_list_1[index]};')
+#         div.add_style(f'color: {color_list_2[index]};')
+#         div.add_class('class1')
+#         div.add_class('class2')
+#         main_div.internal.append(div)
+#     doc.body.append(main_div)
+#     doc.styles.append({
+#         'class1': [{'border-style': 'solid'}],
+#         'class2': [
+#             {'display': 'inline-block'},
+#             {'min-width': '300px'},
+#             {'max-width': '350px'},
+#         ]
+#     })
+#     content = Paragraph()
+#     content.add_class('test1')
+#     content.add_style({'text-block': 'centered'})
+#     content.internal.append('simple string')
+#     content.internal.append(123)
+#     content.internal.append(Div())
+#     content.internal.append(Paragraph())
+#     content.internal.append(Link())
+#     content.internal.append(HyperLink())
+#     content.internal.append(Image())
+#     content.internal.append(Blockquote())
+#     content.internal.append(LineBreak())
+#     content.internal.append(Bold('test'))
+#     content.internal.append(Strong('test'))
+#     content.internal.append(Italic('test'))
+#     content.internal.append(Emphasized('test'))
+#     content.internal.append(Marked('test'))
+#     content.internal.append(Smaller('test'))
+#     content.internal.append(Deleted('test'))
+#     content.internal.append(Inserted('test'))
+#     content.internal.append(Subscript('test'))
+#     content.internal.append(Superscript('test'))
+#     content.internal.append(Emoji('emojicode'))
+#     doc.body.append(content)
 
-    expected = []
-    with open('tests/resources/document_actual_html_page.html', 'r') as tf:
-        for line in tf.readlines():
-            expected.append(line)
-    expected = "".join(expected)
-    actual = doc.return_document
-    assert actual == expected
+#     expected = []
+#     with open('tests/resources/document_actual_html_page.html', 'r') as tf:
+#         for line in tf.readlines():
+#             expected.append(line)
+#     expected = "".join(expected)
+#     actual = doc.return_document
+#     assert actual == expected

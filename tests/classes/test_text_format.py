@@ -13,7 +13,6 @@ from phtml import (
     Superscript,
     Emoji,
 )
-from unittest import TestCase
 import pytest
 
 

@@ -1,5 +1,4 @@
 from phtml import Paragraph
-from unittest import TestCase
 import pytest
 
 

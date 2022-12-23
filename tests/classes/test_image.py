@@ -1,5 +1,4 @@
 from phtml import Image
-from unittest import TestCase
 import pytest
 
 

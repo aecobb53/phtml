@@ -1,28 +1,4 @@
-from os import access
 from phtml import *
-# from phtml.classes.html_list import HtmlList, HtmlListItem
-# from phtml.classes.div import Div
-# from phtml.classes.paragraph import Paragraph
-# from phtml.classes.link import Link
-# from phtml.classes.image import Image
-# from phtml.classes.blockquote import Blockquote
-# from phtml.classes.html_list import HtmlList, HtmlListItem
-# from phtml.classes.text_format import (
-#     TextFormat,
-#     LineBreak,
-#     Bold,
-#     Strong,
-#     Italic,
-#     Emphasized,
-#     Marked,
-#     Smaller,
-#     Deleted,
-#     Inserted,
-#     Subscript,
-#     Superscript,
-#     Emoji,
-# )
-from unittest import TestCase
 import pytest
 
 

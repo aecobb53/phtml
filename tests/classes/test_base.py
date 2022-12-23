@@ -1,7 +1,5 @@
 from phtml import Base
-from unittest import TestCase
 import pytest
-
 
 def test_setup():
     item = Base()
