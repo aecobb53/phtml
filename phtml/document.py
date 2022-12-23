@@ -33,9 +33,13 @@ class Document:
         details.append('<body>')
         for line in self.create_details_list(lst=self.body):
             details.append(line)
+        a = details[-50:]
         if self.styles:
+            x=1
             for line in self.creatre_styles_list():
+                x=1
                 details.append(f"{self.indent}{line}")
+                x=1
         details.append('</body>')
         details.append('</html>')
         return '\n'.join(details)
@@ -57,11 +61,16 @@ class Document:
         details = []
         details.append('<style>')
         for style in self.styles:
+            x=1
             if not isinstance(style, Style):
                 details.append(style)
                 continue
+            a = style.return_content
+            x=1
             for line in style.return_content:
+                x=1
                 details.append(f"{self.indent}{line}")
+                x=1
             # details.append(style.return_content)
         # for class_obj in self.styles:
         #     for class_name, class_details in class_obj.items():

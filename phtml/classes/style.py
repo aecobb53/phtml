@@ -9,7 +9,7 @@ class Style:
     @property
     def return_content(self):
         if len(self.styles) <= 1:
-            return self.return_string_version
+            return [self.return_string_version]
         style_l = [self.name + ' {']
         for key, value in self.styles.items():
             style_l.append(f"{self.indent}{key}: {value};")

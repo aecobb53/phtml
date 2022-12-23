@@ -246,7 +246,7 @@ class HtmlReader:
             x=1
             current_element.styles.extend(styles)
             x=1
-            return element
+            return None
         if not found and tag not in ['head', 'body']:
             x=1
         # if not found and tag not in ['style']:
