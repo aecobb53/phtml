@@ -12,7 +12,7 @@ def test_empty():
     assert actual == expected
 
 def test_not_empty():
-    item = Title(content='TITLE')
+    item = Title(internal='TITLE')
     expected = [
         '<title>',
         '    TITLE',

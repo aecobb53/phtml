@@ -48,26 +48,22 @@ class HtmlReader:
         if remaining_content.startswith('<!DOCTYPE html>'):
             remaining_content = remaining_content[15:].strip()
             main_loop = True
-        # if remaining_content.startswith('<html>'):
-        #     remaining_content = remaining_content[6:].strip()
-        # if remaining_content.endswith('</html>'):
-        #     remaining_content = remaining_content[:-7].strip()
         loop_active = True
         while loop_active:
-            old_content = remaining_content
+            # old_content = remaining_content
             loop_active, remaining_content, element = self.find_next_element(
                 remaining_content=remaining_content,
                 current_element=current_element
             )
-            if main_loop:
-                x=1
-            x=1
+            # if main_loop:
+            #     x=1
+            # x=1
             if element is not None:
                 contents.append(element)
-            x=1
-        x=1
-        if main_loop    :
-            x=1
+        #     x=1
+        # x=1
+        # if main_loop:
+        #     x=1
         return contents
 
     def find_next_element(self, remaining_content, current_content='', current_element=None):
@@ -84,10 +80,9 @@ class HtmlReader:
             """
             if tag_start == 'br':
                 match_start_index = match_start.start()
-                match_end_index = match_start.end()
+                match_end_index = match_start.end() + 1
                 element = LineBreak()
             elif tag_start == 'link':
-                # match_end = re.search(f'/>$', content)
                 match_end = re.search(f'/?>', remaining_content)
                 match_start_index = match_start.start()
                 match_end_index = match_end.end()
@@ -97,31 +92,19 @@ class HtmlReader:
                 loop = True
                 while loop:
                     loop = False
-                    # tmp_str_start = remaining_content[view_window_starts:]
-                    # tmp_str_end = remaining_content[view_window_ends:]
                     match_beg = re.search(f'<{tag_start}', remaining_content[view_window_starts:])
                     match_end = re.search(f'</{tag_start}>', remaining_content[view_window_ends:])
                     if match_beg is None:
                         break
-                    if match_end is None:
-                        x=1
                     if (match_beg.start() + view_window_starts) < (match_end.start() + view_window_ends):
-                        x=1
                         view_window_starts = view_window_starts + match_beg.end()
                         view_window_ends = view_window_ends + match_end.end()
                         loop = True
-                        x=1
-                # match_end = re.search(f'</{tag_start}', remaining_content)
                 match_start_index = match_start.start()
                 try:
-                    # match_end_index = match_end.end() + view_window_start + 1
-                    # a = remaining_content[match_end_index-10:match_end_index]
-                    # b = remaining_content[match_end_index:match_end_index+10]
                     match_end_index = match_end.end() + view_window_ends
-                    x=1
                 except Exception as e:
                     e
-                    match_end_index = len(content)
 
             """
             Process the tag
@@ -136,10 +119,6 @@ class HtmlReader:
             """
             Some tags need a bit more massaging after
             """
-            # if tag_start == 'link':
-            #     remaining_content = remaining_content[0:start_index] + remaining_content[end_index:-1]
-            # else:
-            #     remaining_content = remaining_content[0:start_index] + remaining_content[end_index:]
             remaining_content = remaining_content[0:start_index] + remaining_content[end_index:]
         else:
             return False, None, remaining_content
@@ -168,7 +147,6 @@ class HtmlReader:
                 new_tag_attributes = []
                 for index in range(len(tag_attributes)):
                     item = tag_attributes[index]
-                    x=1
                     if not item:
                         del tag_attributes[index]
                         modding = True
@@ -230,9 +208,6 @@ class HtmlReader:
         elif tag == 'link':
             found = True
             element = HyperLink(**tags_dict)
-        # elif tag == 'br':
-        #     found = True
-        #     element = LineBreak(**tags_dict)
         elif tag == 'title':
             found = True
             element = Title(**tags_dict)
@@ -247,8 +222,8 @@ class HtmlReader:
             current_element.styles.extend(styles)
             x=1
             return None
-        if not found and tag not in ['head', 'body']:
-            x=1
+        # if not found and tag not in ['head', 'body']:
+        #     x=1
         # if not found and tag not in ['style']:
         #     return ''
         if tags_classes:
@@ -260,28 +235,18 @@ class HtmlReader:
             contents = self.read_data(content, current_element)
         else:
             contents = []
-        x=1
         for content in contents:
             try:
                 if tag in ['head', 'body'] and isinstance(current_element, Document):
-                    a = 1
                     getattr(current_element, tag).append(content)
                     element = None
                 elif isinstance(element, LineBreak):
-                    a = 2
                     pass
                 else:
-                    a = 3
-                    if isinstance(element, Document):
-                        x=1
                     element.internal.append(content)
             except Exception as e:
                 e
-                # if tag == 'head':
-
-                x=1
                 element = None
-        x=1
         if tag == 'html':
             return current_element
         return element
@@ -301,13 +266,3 @@ class HtmlReader:
                 style[key] = value
             styles.append(Style(name=name, style_details=style))
         return styles
-
-
-# h = HtmlReader()
-
-# contents = h.read_file('tests/resources/old_class_builds_for_manipulation.html')
-
-# with open('testdoc_deleteme.html', 'w') as hf:
-#     hf.write(contents[0].return_document)
-
-# x=1
