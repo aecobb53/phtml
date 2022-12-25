@@ -1,4 +1,6 @@
 from .text_format import TextFormat
+from .style import Style
+
 
 class Base:
     def __init__(self, internal=None):
@@ -25,23 +27,10 @@ class Base:
             self.attributes['class'].append(class_obj)
 
     def add_style(self, style_obj):
-        styles = []
         if not isinstance(style_obj, list):
             style_obj = [style_obj]
         for obj in style_obj:
             self.attributes['style'].append(obj)
-            # if isinstance(style_obj, dict):
-            #     self.attributes['style'].update(style_obj)
-            # else:
-            #     self.attributes['style'].
-        # if not isinstance(style_obj, list):
-        #     self.attributes['style'].extend(style_obj)
-        # else:
-        #     self.attributes['style'].append(style_obj)
-        # if isinstance(style_obj, list):
-        #     self.attributes['style'].extend(style_obj)
-        # else:
-        #     self.attributes['style'].append(style_obj)
 
     def add_internal(self, obj):
         self.internal.append(obj)
@@ -53,14 +42,7 @@ class Base:
             if not att_data:
                 continue
             if attribute == 'style':
-                style = []
-                for att in att_data:
-                    if isinstance(att, dict):
-                        for key, value in att.items():
-                            style.append(f"{key}: {value};")
-                    else:
-                        style.append(att)
-                details[0] += f' style="{" ".join(style)}"'
+                details[0] += f' style="{" ".join([att.return_string_version[1:-1] for att in att_data])}"'
             elif not isinstance(att_data, list):
                 details [0] += f' {attribute}="{att_data}"'
             else:

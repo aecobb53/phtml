@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name='phtml',
-    version='0.4.1',
+    version='0.4.2',
     author='Andrew Cobb',
     author_email='aecobb53@gmail.com',
     description='Manages an html file in python form',

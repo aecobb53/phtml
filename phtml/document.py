@@ -61,16 +61,11 @@ class Document:
         details = []
         details.append('<style>')
         for style in self.styles:
-            x=1
             if not isinstance(style, Style):
                 details.append(style)
                 continue
-            a = style.return_content
-            x=1
             for line in style.return_content:
-                x=1
                 details.append(f"{self.indent}{line}")
-                x=1
             # details.append(style.return_content)
         # for class_obj in self.styles:
         #     for class_name, class_details in class_obj.items():

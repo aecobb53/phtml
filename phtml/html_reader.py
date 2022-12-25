@@ -164,7 +164,7 @@ class HtmlReader:
                     new_tag_attributes.append(item)
             tags_dict = {}
             tags_classes = []
-            tags_styles = {}
+            tags_styles = []
             for ta in tag_attributes:
                 kv = ta.split('=')
                 if len(kv) != 2:
@@ -172,11 +172,15 @@ class HtmlReader:
                 key = kv[0]
                 value = kv[-1][1:-1]
                 if key == 'style':
-                    for vi in value.split(';'):
-                        if not vi:
-                            continue
-                        style_key, style_value =  vi.split(':')
-                        tags_styles[style_key.strip()] = style_value.strip()
+                    x=1
+                    stl = self.parse_style(style_string=value)
+                    x=1
+                    tags_styles.extend(stl)
+                    # for vi in value.split(';'):
+                    #     if not vi:
+                    #         continue
+                    #     style_key, style_value =  vi.split(':')
+                    #     tags_styles[style_key.strip()] = style_value.strip()
                 elif key == 'class':
                     for cl in value.split(' '):
                         if cl:
@@ -218,9 +222,7 @@ class HtmlReader:
             found = True
             element = content
             styles = self.parse_style(content)
-            x=1
             current_element.styles.extend(styles)
-            x=1
             return None
         # if not found and tag not in ['head', 'body']:
         #     x=1
@@ -229,8 +231,10 @@ class HtmlReader:
         if tags_classes:
             [element.add_class(cl) for cl in tags_classes]
         if tags_styles:
-            for key, value in tags_styles.items():
-                element.add_style({key: value})
+            for style in tags_styles:
+                element.add_style(style)
+            # for key, value in tags_styles.items():
+            #     element.add_style({key: value})
         if content:
             contents = self.read_data(content, current_element)
         else:
@@ -253,11 +257,17 @@ class HtmlReader:
 
     def parse_style(self, style_string):
         style_string = re.sub(r'\/\*[a-zA-Z0-9.,{}()\[\] :;#\%-]+\*/', '', style_string) # Removing comments
-        results2 = style_string.split('}')
+        results = style_string.split('}')
         styles = []
-        for item in results2:
+        x=1
+        for item in results:
+            if item == '':
+                continue
             kv = item.split('{')
-            name = kv[0].strip()
+            if len(kv) == 1:
+                name = None
+            else:
+                name = kv[0].strip()
             style = {}
             for kv in kv[-1].split(';'):
                 if kv == '':

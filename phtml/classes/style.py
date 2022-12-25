@@ -18,7 +18,10 @@ class Style:
 
     @property
     def return_string_version(self):
-        style = self.name + ' {'
+        if self.name is None:
+            style = '{'
+        else:
+            style = self.name + ' {'
         style += ' '.join([f'{k}: {v};' for k, v in self.styles.items()])
         style += '}'
         return style
