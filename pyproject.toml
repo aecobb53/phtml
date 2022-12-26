@@ -1,6 +1,6 @@
 [project]
 name = "phtml"
-version = "0.4.2"
+version = "0.4.3"
 description = 'Manages an html file in python form'
 authors = [
     {name = "Andrew Cobb", email = "aecobb53@gmail.com"}
