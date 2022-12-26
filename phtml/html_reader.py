@@ -276,3 +276,5 @@ class HtmlReader:
                 style[key] = value
             styles.append(Style(name=name, style_details=style))
         return styles
+
+    # def 
