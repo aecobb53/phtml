@@ -1,0 +1,218 @@
+body {
+    background-color: green;
+}
+
+body h1 {
+    color: #f4f4f4;
+}
+
+body > h2 {
+    color: green;
+    text-align: center;
+}
+
+.tiles {
+    margin:50px;
+    padding:10px;
+    display: inline-block;
+    border-style: solid;
+    border-color: purple;
+    background-color: #373737;
+}
+
+.tile {
+    display: inline-block;
+    margin:10px;
+    padding:10px;
+    vertical-align:top;
+    min-width: 200px;
+    max-width: 800px;
+    border-style: solid;
+    border-color: white;
+    background-color: #373737;
+}
+
+div.tile p {
+    margin:5px;
+    padding:0px;
+    color: red;
+}
+
+.tile h1 {
+    text-align: center;
+    font-size: 160%;
+    margin: 5px;
+    padding: 5px;
+    margin-top: 0px;
+    padding-top: 0px;
+    color: green;
+    border-bottom: 1px solid #dedede;
+}
+
+.tile h2 {
+    margin: 2px;
+    padding: 5px 3px 3px;
+    font-size: 120%;
+    color: #f4f4d3;
+}
+
+.tile p {
+    margin: 0px;
+    padding: 0px;
+    font-size: 100%;
+    color: white;
+}
+
+.pageBreak {
+    border-top: 1px solid #dedede;
+}
+
+.build-point-item {
+    display: inline-block;
+    margin: 0px 1px 0px;
+    padding: 0px;
+    /* margin: 0px;
+    padding: 0px 1px 0px; */
+}
+
+
+
+.slot-tile {
+    margin:3px;
+    /* padding:5px; */
+    display: inline-block;
+    /* min-width: 200px;
+    max-width: 300px; */
+    /* border-style: solid; */
+    /* border-color: #2890DE; */
+    /* background-color: #474747; */
+    /* text-align: left;
+    font-size: 90%; */
+}
+
+div.slot-tile h2 {
+    margin:3px;
+    padding: 3px;
+    text-align: center;
+    font-size: 110%;
+    color:rgb(215, 215, 215);
+}
+
+div.slot-tile p {
+    margin:0px;
+    padding: 0px;
+    text-align: left;
+    font-size: 90%;
+    color:rgb(215, 215, 215);
+}
+
+div.slot-tile div {
+    margin:0px;
+    padding: 0px;
+    text-align: left;
+    font-size: 90%;
+    color:rgb(215, 215, 215);
+}
+
+
+
+.equipment-tile {
+    margin:3px;
+    padding:3px;
+    display: inline-block;
+    min-width: 300px;
+    max-width: 350px;
+    border-style: solid;
+    border-color: #2890DE;
+    background-color: #474747;
+    text-align: left;
+    font-size: 110%;
+}
+
+/* div.equipment-tile h2 {
+    margin:3px;
+    padding: 3px;
+    text-align: center;
+    font-size: 110%;
+    color:rgb(215, 215, 215);
+} */
+
+/* div.equipment-tile p {
+    margin:0px;
+    padding: 0px;
+    text-align: left;
+    font-size: 110%;
+    color:rgb(215, 215, 215);
+} */
+
+/* div.equipment-tile a {
+    margin:0px;
+    padding:0px;
+} */
+
+
+
+
+
+
+
+
+.dropbtn {
+    background-color: rgb(85, 85, 85);
+    color: rgb(215, 215, 215);
+    padding: 3px;
+    font-size: 100%;
+    border: none;
+    cursor: pointer;
+    color: #f4f4f4;
+}
+
+/* The container <div> - needed to position the dropdown content */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #2b2a2a;
+    min-width: 75px;
+    min-width: 300px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+/* Links inside the dropdown */
+.build-link a {
+    color: white;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+/* Change color of dropdown links on hover */
+.dropdown-content a:hover {background-color: black}
+
+/* Show the dropdown menu on hover */
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+/* Change the background color of the dropdown button when the dropdown content is shown */
+.dropdown:hover .dropbtn {
+    background-color: black;
+}
+
+/* .associated-dropdown{
+    background-color: rgb(0, 85, 85);
+    color: cyan;
+}
+
+.archived-dropdown{
+    background-color: rgb(85, 85, 0);
+    color: orange;
+} */
+
+/* #2b2a2a */
