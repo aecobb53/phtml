@@ -38,15 +38,33 @@ class Base:
     @property
     def return_document(self):
         details = [f'<{self.start_string}']
+
+        x=1
         for attribute, att_data in self.attributes.items():
-            if not att_data:
-                continue
-            if attribute == 'style':
-                details[0] += f' style="{" ".join([att.return_string_version[1:-1] for att in att_data])}"'
-            elif not isinstance(att_data, list):
-                details [0] += f' {attribute}="{att_data}"'
-            else:
-                details [0] += f' {attribute}="{" ".join(att_data)}"'
+            try:
+                if not att_data:
+                    continue
+                if attribute == 'style':
+                    style = f' style="'
+                    style_l = []
+                    for att in att_data:
+                        if isinstance(att, Style):
+                            style_l.append(att.return_string_version[1:-1])
+                        else:
+                            for key, value in att.items():
+                                style_l.append(f'{key}: {value};')
+                            x=1
+                    style += f'{" ".join(style_l)}'
+                    style += '"'
+                    x=1
+                    # details[0] += f' style="{" ".join([att.return_string_version[1:-1] for att in att_data])}"'
+                    details[0] += style
+                elif not isinstance(att_data, list):
+                    details [0] += f' {attribute}="{att_data}"'
+                else:
+                    details [0] += f' {attribute}="{" ".join(att_data)}"'
+            except Exception as e:
+                e
         details[0] += '>'
         if self.internal:
             for internal in self.internal:

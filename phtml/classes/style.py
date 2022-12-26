@@ -1,7 +1,7 @@
 
 
 class Style:
-    def __init__(self, name, style_details):
+    def __init__(self, style_details, name=None):
         self.name = name
         self.styles = style_details
         self.indent = '    '
