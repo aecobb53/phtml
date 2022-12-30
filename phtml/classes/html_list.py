@@ -22,7 +22,6 @@ class HtmlListItem(Base):
         list_description=None,
         term_description=None,
         term_in_description_list=None,
-        internal=None
     ):
         super().__init__()
         self.content = content
@@ -46,8 +45,6 @@ class HtmlListItem(Base):
             elif isinstance(self.content, TextFormat):
                 details = ['<li>']
                 details.append(f"{self.indent}{self.content.return_content}")
-                # for line in self.content.return_content:
-                #     details.append(f"{self.indent}{line}")
                 details.append('</li>')
             else:
                 details = [f"<li>{self.content}</li>"]
@@ -91,4 +88,3 @@ class HtmlListItem(Base):
             else:
                 details = [f"<dd>{self.content}</dd>"]
         return details
-

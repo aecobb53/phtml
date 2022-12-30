@@ -1,7 +1,7 @@
 from phtml.classes.base import Base
 from phtml.classes.text_format import TextFormat
 from phtml.classes.style import Style
-from phtml.classes.html_list import HtmlList, HtmlListItem
+
 
 class Document:
     def __init__(self):
@@ -33,13 +33,9 @@ class Document:
         details.append('<body>')
         for line in self.create_details_list(lst=self.body):
             details.append(line)
-        a = details[-50:]
         if self.styles:
-            x=1
             for line in self.creatre_styles_list():
-                x=1
                 details.append(f"{self.indent}{line}")
-                x=1
         details.append('</body>')
         details.append('</html>')
         return '\n'.join(details)
@@ -47,7 +43,6 @@ class Document:
     def create_details_list(self, lst):
         details = []
         for item in lst:
-            x=1
             if isinstance(item, TextFormat):
                 details.append(f"{self.indent}{item.return_content}")
             elif isinstance(item, Base):
@@ -66,24 +61,5 @@ class Document:
                 continue
             for line in style.return_content:
                 details.append(f"{self.indent}{line}")
-            # details.append(style.return_content)
-        # for class_obj in self.styles:
-        #     for class_name, class_details in class_obj.items():
-        #         style = [f'{self.indent}{class_name} ' + '{']
-        #         deets = []
-        #         if isinstance(class_details, list):
-        #             for cd in class_details:
-        #                 deets.extend([f"{k}: {v};" for k, v in cd.items()])
-        #         else:
-        #             deets.extend([f"{k}: {v};" for k, v in class_details.items()])
-        #         if len(deets) < 1:
-        #             style[0] += '}'
-        #         if len(deets) == 1:
-        #             style[0] += deets[0] + '}'
-        #         else:
-        #             style.extend([f"{self.indent * 2}{d}" for d in deets])
-        #             style.append(self.indent + '}')
-        #         details.extend(style)
         details.append('</style>')
         return details
-

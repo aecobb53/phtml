@@ -1,5 +1,8 @@
 from phtml.classes.base import Base
-from .blockquote import Blockquote
+from .blockquote import (
+    Blockquote,
+    Inlinequote,
+)
 from .div import Div
 from .header import Header
 from .html_list import (

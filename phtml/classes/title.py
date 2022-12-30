@@ -9,5 +9,3 @@ class Title(Base):
         super().__init__(internal=internal)
         self.start_string = 'title'
         self.end_string = 'title'
-        # if content:
-        #     self.internal.append(content)

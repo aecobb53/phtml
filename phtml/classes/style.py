@@ -1,5 +1,3 @@
-
-
 class Style:
     def __init__(self, style_details, name=None):
         self.name = name

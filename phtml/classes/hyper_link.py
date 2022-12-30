@@ -14,6 +14,7 @@ class HyperLink(Base):
         title=None,
         type=None,
         internal=None,
+        target=None,
     ):
         super().__init__(internal=internal)
         self.start_string = 'link'
@@ -46,3 +47,6 @@ class HyperLink(Base):
 
         if type is not None:
             self.attributes['type'] = type
+
+        if target is not None:
+            self.attributes['target'] = target

@@ -6,5 +6,3 @@ class Header(Base):
         super().__init__(internal=internal)
         self.start_string = f'h{level}'
         self.end_string = f'h{level}'
-        # if content:
-        #     self.internal.append(content)
