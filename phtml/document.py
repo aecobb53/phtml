@@ -4,7 +4,7 @@ from phtml.classes.style import Style
 
 
 class Document:
-    def __init__(self):
+    def __init__(self, **kwargs):
         self.head = []
         self.body = []
         self.styles = []
@@ -43,12 +43,15 @@ class Document:
     def create_details_list(self, lst):
         details = []
         for item in lst:
+            x=1
             if isinstance(item, TextFormat):
                 details.append(f"{self.indent}{item.return_content}")
             elif isinstance(item, Base):
                 for line in item.return_document:
                     details.append(f"{self.indent}{line}")
             else:
+                if item.strip() == '':
+                    continue
                 details.append(item)
         return details
 

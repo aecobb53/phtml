@@ -15,8 +15,9 @@ class HyperLink(Base):
         type=None,
         internal=None,
         target=None,
+        **kwargs
     ):
-        super().__init__(internal=internal)
+        super().__init__(internal=internal, **kwargs)
         self.start_string = 'link'
         self.end_string = 'link'
         self.attributes['href'] = '#'

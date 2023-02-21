@@ -3,8 +3,8 @@ from .text_format import TextFormat
 
 
 class HtmlList(Base):
-    def __init__(self, ordered=False, internal=None):
-        super().__init__(internal=internal)
+    def __init__(self, ordered=False, internal=None, **kwargs):
+        super().__init__(internal=internal, **kwargs)
         if ordered:
             self.start_string = 'ol'
             self.end_string = 'ol'
@@ -22,8 +22,9 @@ class HtmlListItem(Base):
         list_description=None,
         term_description=None,
         term_in_description_list=None,
+        **kwargs
     ):
-        super().__init__()
+        super().__init__(**kwargs)
         self.content = content
         self.indent = indent
         self.list_item = list_item

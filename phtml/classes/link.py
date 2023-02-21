@@ -13,9 +13,10 @@ class Link(Base):
         rel=None,
         target=None,
         type=None,
-        internal=None
+        internal=None,
+        **kwargs
     ):
-        super().__init__(internal=internal)
+        super().__init__(internal=internal, **kwargs)
         self.start_string = 'a'
         self.end_string = 'a'
         self.attributes['href'] = '#'

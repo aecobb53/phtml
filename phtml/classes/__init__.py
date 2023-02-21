@@ -1,4 +1,5 @@
 from phtml.classes.base import Base
+from phtml.classes.iframe import IFrame
 from .blockquote import (
     Blockquote,
     Inlinequote,
@@ -30,4 +31,12 @@ from .text_format import (
     Superscript,
     Emoji,
 )
+from .span import Span
+from .svg import Svg, SubParameter
+from .canvas import Canvas
+from .meta import Meta
+from .input import Input
+from .iframe import IFrame
+from .noscript import Noscript
+from .comment import Comment
 from .style import Style

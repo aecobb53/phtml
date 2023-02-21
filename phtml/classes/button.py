@@ -16,8 +16,9 @@ class Button(Base):
         name=None,
         type=None,
         value=None,
+        **kwargs
     ):
-        super().__init__(internal=internal)
+        super().__init__(internal=internal, **kwargs)
         self.start_string = 'button'
         self.end_string = 'button'
 

@@ -1,13 +1,65 @@
+from sys import intern
+
+from numpy import isin
 from .text_format import TextFormat
 from .style import Style
 
 
 class Base:
-    def __init__(self, internal=None):
+    def __init__(
+        self,
+        accesskey=None,
+        contenteditable=None,
+        dir=None,
+        draggable=None,
+        hidden=None,
+        id=None,
+        lang=None,
+        spellcheck=None,
+        tabindex=None,
+        title=None,
+        translate=None,
+        internal=None,
+        **kwargs
+    ):
         self.attributes = {
             'class': [],
             'style': [],
         }
+
+        if accesskey is not None:
+            self.attributes['accesskey'] = accesskey
+
+        if contenteditable is not None:
+            self.attributes['contenteditable'] = contenteditable
+
+        if dir is not None:
+            self.attributes['dir'] = dir
+
+        if draggable is not None:
+            self.attributes['draggable'] = draggable
+
+        if hidden is not None:
+            self.attributes['hidden'] = hidden
+
+        if id is not None:
+            self.attributes['id'] = id
+
+        if lang is not None:
+            self.attributes['lang'] = lang
+
+        if spellcheck is not None:
+            self.attributes['spellcheck'] = spellcheck
+
+        if tabindex is not None:
+            self.attributes['tabindex'] = tabindex
+
+        if title is not None:
+            self.attributes['title'] = title
+
+        if translate is not None:
+            self.attributes['translate'] = translate
+
         self.internal = []
         if internal:
             if isinstance(internal, list):
@@ -56,7 +108,8 @@ class Base:
             else:
                 details [0] += f' {attribute}="{" ".join(att_data)}"'
             # There was an except statement around the if/else block above but i think it was just for testing
-        details[0] += '>'
+        if self.start_string != '!--':
+            details[0] += '>'
         if self.internal:
             for internal in self.internal:
                 if isinstance(internal, Base):
@@ -66,14 +119,57 @@ class Base:
                     details.append(self.indent + internal.return_content)
                 else:
                     try:
-                        details.append(self.indent + internal)
+                        if internal.strip() == '':
+                            continue
+                        details.append(self.indent + internal.strip())
                     except:
-                        details.append(self.indent + str(internal))
+                        details.append(self.indent + str(internal).strip())
         if self.end_string:
-            details.append(f'</{self.end_string}>')
+            if self.end_string == '--':
+                details.append(f'{self.end_string}>')
+            else:
+                details.append(f'</{self.end_string}>')
+        if len(details) < 3:
+            x=1
+            if len(details[0]) < 100:
+                details = [''.join(details)]
         return details
 
     @property
     def return_string_version(self):
         details = self.return_document
         return ''.join([l.strip() for l in details])
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# accesskey
+# contenteditable
+# data-*  -- We could accept kwargs and then if it starts with data- then its one of these objects
+# dir
+# draggable
+# hidden
+# id
+# lang
+# spellcheck
+# tabindex
+# title
+# translate
+
+
+
+
+
