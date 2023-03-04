@@ -1,19 +1,19 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta>
-    <meta>
+    <meta charset="UTF-8">
+    <meta name="viewport">
     <title>
         IFSC Climbing Result Service
     </title>
-    <meta>
-    <meta>
+    <meta name="csrf-param" content="authenticity_token">
+    <meta name="csrf-token">
     <link href="/assets/application-929df3effb011b1dd84779b773b0be50af90663e0274932b25837eb03f6f118e.css" media="all" rel="stylesheet">
     </link>
-    <meta>
-    <meta>
-    <meta>
-    <meta>
+    <meta property="og:url" content="https://ifsc.results.info">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="IFSC Climbing Result Service">
+    <meta property="og:description" content="The result site of IFSC climbing competitions, with starters, live results and rankings powered by Vertical-Life">
 </head>
 <body>
     <noscript>
@@ -22,8 +22,7 @@
     <div style="display:  none;" id="cable-path">
         ifsc_cable
     </div>
-    <link href="/packs/css/front/index-81478c31.css" media="screen" rel="stylesheet">
-    </link>
+    <link href="/packs/css/front/index-81478c31.css" media="screen" rel="stylesheet"></link>
     <div class="app-container">
         <div class="rs-header w-100 px-2 rs-header bg-white">
             <div class="rs-header-container">
@@ -50,17 +49,19 @@
                 </div>
                 <div class="d-flex align-items-center justify-content-end">
                     <a href="/users/login">
-                        <svg class="login-btn"></svg>
+                        <svg class="login-btn" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        </svg>
                     </a>
                 </div>
             </div>
         </div>
-        <div class="ar-container rs-content">
+        <div class="ar-container rs-content" dcat_id="7">
             <div class="ar-header">
                 <div class="ar-name-container">
                     <div class="back-button-container">
                         <div class="back-button">
-                            <svg class="iconify" style="transform:  rotate(360deg);"></svg>
+                            <svg class="iconify" style="transform:  rotate(360deg);" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" focusable="false" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24" data-icon="eva:arrow-back-fill" data-inline="false">
+                            </svg>
                         </div>
                     </div>
                     <div class="ar-name">
@@ -74,7 +75,7 @@
                     <div class="number-events">
                         8 events
                     </div>
-                    <a class="single-events-button" href="#collapseExample">
+                    <a class="single-events-button" data-toggle="collapse" href="#collapseExample">
                         See single events
                     </a>
                 </div>
@@ -175,7 +176,7 @@
                     <a class="mx-2 nav-item" href="#/rankings/cuwr/6">
                         SPEED Women
                     </a>
-                    <a class="mx-2 nav-item router-link-exact-active router-link-active active" href="#/rankings/cuwr/7">
+                    <a class="mx-2 nav-item router-link-exact-active router-link-active active" aria-current="page" href="#/rankings/cuwr/7">
                         BOULDER Women
                     </a>
                     <a class="mx-2 nav-item" href="#/rankings/cuwr/618">
@@ -190,7 +191,7 @@
                             Show details
                         </span>
                         <div class="custom-control custom-switch">
-                            <input class="custom-control-input">
+                            <input class="custom-control-input" type="checkbox">
                         </div>
                     </div>
                     <div>

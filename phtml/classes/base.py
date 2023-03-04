@@ -1,6 +1,3 @@
-from sys import intern
-
-from numpy import isin
 from .text_format import TextFormat
 from .style import Style
 
@@ -59,6 +56,9 @@ class Base:
 
         if translate is not None:
             self.attributes['translate'] = translate
+
+        for key, value in kwargs.items():
+            self.attributes[key] = value
 
         self.internal = []
         if internal:
@@ -139,6 +139,20 @@ class Base:
     def return_string_version(self):
         details = self.return_document
         return ''.join([l.strip() for l in details])
+
+    @property
+    def text(self):
+        text_l = []
+        for item in self.internal:
+            if not isinstance(item, (Base, TextFormat)):
+                text_l.append(item)
+        return '\n'.join(text_l)
+
+
+    # @property
+    # def return_element_list(self):
+    #     elements = []
+    #     for item in self.inter
 
 
 
