@@ -7,10 +7,6 @@ class Image(Base):
         self.start_string = 'img'
         self.end_string = False
         self.attributes['src'] = '#'
-        self.attributes['alt'] = False
-
-        # width
-        # height
 
     def add_src(self, path):
         self.attributes['src'] = path

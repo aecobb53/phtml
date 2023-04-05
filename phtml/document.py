@@ -9,17 +9,16 @@ class Document:
         self.body = []
         self.styles = []
         self.scripts = []
-        self.contents = []
         self.indent = '    '
 
-    def add_head_item(self, obj):
+    def add_head_element(self, obj):
         self.body.append(obj)
 
-    def add_body_item(self, obj):
+    def add_body_element(self, obj):
         self.body.append(obj)
 
-    def add_contents(self, obj):
-        self.contents.append(obj)
+    def set_indent_width(self, width=4):
+        self.indent = ' ' * width
 
     @property
     def return_document(self):
@@ -39,6 +38,12 @@ class Document:
         details.append('</body>')
         details.append('</html>')
         return '\n'.join(details)
+
+    def add_style(self, style_obj):
+        if not isinstance(style_obj, list):
+            style_obj = [style_obj]
+        for obj in style_obj:
+            self.styles.append(obj)
 
     def create_details_list(self, lst):
         details = []

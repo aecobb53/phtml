@@ -82,21 +82,26 @@ class Base:
         for obj in style_obj:
             self.attributes['style'].append(obj)
 
-    def add_internal(self, obj):
+    def add_element(self, obj):
         self.internal.append(obj)
 
     @property
     def return_document(self):
         details = [f'<{self.start_string}']
         for attribute, att_data in self.attributes.items():
-            if not att_data:
-                continue
-            if attribute == 'style':
+            if attribute == 'class':
+                if not att_data:
+                    continue
+                details[0] += f' class="{" ".join(att_data)}"'
+            elif attribute == 'style':
+                if not att_data:
+                    continue
                 style = f' style="'
                 style_l = []
                 for att in att_data:
                     if isinstance(att, Style):
-                        style_l.append(att.return_string_version[1:-1])
+                        style_item = att.return_string_version[:-1].split('{')[-1]
+                        style_l.append(style_item)
                     else:
                         for key, value in att.items():
                             style_l.append(f'{key}: {value};')
@@ -104,10 +109,12 @@ class Base:
                 style += '"'
                 details[0] += style
             elif not isinstance(att_data, list):
-                details [0] += f' {attribute}="{att_data}"'
+                if att_data is None:
+                    details [0] += f' {attribute}'
+                else:
+                    details [0] += f' {attribute}="{att_data}"'
             else:
                 details [0] += f' {attribute}="{" ".join(att_data)}"'
-            # There was an except statement around the if/else block above but i think it was just for testing
         if self.start_string != '!--':
             details[0] += '>'
         if self.internal:
@@ -147,43 +154,3 @@ class Base:
             if not isinstance(item, (Base, TextFormat)):
                 text_l.append(item)
         return '\n'.join(text_l)
-
-
-    # @property
-    # def return_element_list(self):
-    #     elements = []
-    #     for item in self.inter
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-# accesskey
-# contenteditable
-# data-*  -- We could accept kwargs and then if it starts with data- then its one of these objects
-# dir
-# draggable
-# hidden
-# id
-# lang
-# spellcheck
-# tabindex
-# title
-# translate
-
-
-
-
-

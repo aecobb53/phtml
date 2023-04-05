@@ -5,8 +5,7 @@ import pytest
 def test_empty():
     item = Div()
     expected = [
-        '<div>',
-        '</div>',
+        '<div></div>',
     ]
     actual = item.return_document
     assert actual == expected
@@ -15,8 +14,7 @@ def test_simple_class():
     item = Div()
     item.add_class(['testOne', 'testTwo'])
     expected = [
-        '<div class="testOne testTwo">',
-        '</div>',
+        '<div class="testOne testTwo"></div>',
     ]
     actual = item.return_document
     assert actual == expected
@@ -25,8 +23,7 @@ def test_simple_styles():
     item = Div()
     item.add_style({'testOne': 'testTwo'})
     expected = [
-        '<div style="testOne: testTwo;">',
-        '</div>',
+        '<div style="testOne: testTwo;"></div>',
     ]
     actual = item.return_document
     assert actual == expected
@@ -36,8 +33,7 @@ def test_classes_and_styles():
     item.add_class(['testOne', 'testTwo'])
     item.add_style({'testOne': 'testTwo'})
     expected = [
-        '<div class="testOne testTwo" style="testOne: testTwo;">',
-        '</div>',
+        '<div class="testOne testTwo" style="testOne: testTwo;"></div>',
     ]
     actual = item.return_document
     assert actual == expected
@@ -60,10 +56,8 @@ def test_internal_object():
     item.internal.extend([d1, d2])
     expected = [
         '<div>',
-        '    <div>',
-        '    </div>',
-        '    <div>',
-        '    </div>',
+        '    <div></div>',
+        '    <div></div>',
         '</div>',
     ]
     actual = item.return_document

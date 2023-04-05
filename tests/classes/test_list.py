@@ -5,8 +5,7 @@ import pytest
 def test_unordered_HtmlList_empty():
     item = HtmlList()
     expected = [
-        '<ul>',
-        '</ul>',
+        '<ul></ul>',
     ]
     actual = item.return_document
     assert actual == expected
@@ -14,8 +13,7 @@ def test_unordered_HtmlList_empty():
 def test_ordered_HtmlList_empty():
     item = HtmlList(ordered=True)
     expected = [
-        '<ol>',
-        '</ol>',
+        '<ol></ol>',
     ]
     actual = item.return_document
     assert actual == expected
@@ -96,23 +94,19 @@ def test_List_with_ListItem():
         "    <li>string</li>",
         "    <li>123</li>",
         "    <li>",
-        "        <div>",
-        "        </div>",
+        "        <div></div>",
         "    </li>",
         "    <li>",
-        "        <p>",
-        "        </p>",
+        "        <p></p>",
         "    </li>",
         "    <li>",
-        "        <a href=\"#\">",
-        "        </a>",
+        "        <a href=\"#\"></a>",
         "    </li>",
         "    <li>",
         "        <img src=\"#\">",
         "    </li>",
         "    <li>",
-        "        <blockquote>",
-        "        </blockquote>",
+        "        <blockquote></blockquote>",
         "    </li>",
         "    <li>",
         "        <b>test</b>",

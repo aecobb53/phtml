@@ -22,6 +22,8 @@ from phtml.classes.text_format import (
     Superscript,
     Emoji,
 )
+from phtml import Style
+
 from unittest import TestCase
 import pytest
 
@@ -34,45 +36,44 @@ def test_empty():
 
 def test_simple_objects():
     doc = Document()
-    doc.body.append(Header(1))
-    doc.body.append(Div())
-    doc.body.append(Paragraph())
-    doc.body.append(Link())
-    doc.body.append(Image())
-    doc.body.append(Blockquote())
+    doc.add_body_element(Header(1))
+    doc.add_body_element(Div())
+    doc.add_body_element(Paragraph())
+    doc.add_body_element(Link())
+    doc.add_body_element(Image())
+    doc.add_body_element(Blockquote())
     li = HtmlList()
-    li.internal.append(HtmlListItem('one'))
-    li.internal.append(HtmlListItem('two'))
-    doc.body.append(li)
+    li.add_element(HtmlListItem('one'))
+    li.add_element(HtmlListItem('two'))
+    doc.add_body_element(li)
 
     item = HtmlList()
-    item.internal.append(HtmlListItem('simple string'))
-    item.internal.append(HtmlListItem(123))
-    item.internal.append(HtmlListItem(Div()))
-    item.internal.append(HtmlListItem(Paragraph()))
-    item.internal.append(HtmlListItem(Link()))
-    item.internal.append(HtmlListItem(Image()))
-    item.internal.append(HtmlListItem(Blockquote()))
-    item.internal.append(HtmlListItem(Bold('test')))
-    item.internal.append(HtmlListItem(Strong('test')))
-    item.internal.append(HtmlListItem(Italic('test')))
-    item.internal.append(HtmlListItem(Emphasized('test')))
-    item.internal.append(HtmlListItem(Marked('test')))
-    item.internal.append(HtmlListItem(Smaller('test')))
-    item.internal.append(HtmlListItem(Deleted('test')))
-    item.internal.append(HtmlListItem(Inserted('test')))
-    item.internal.append(HtmlListItem(Subscript('test')))
-    item.internal.append(HtmlListItem(Superscript('test')))
-    item.internal.append(HtmlListItem(Emoji('emojicode')))
-    doc.body.append(item)
+    item.add_element(HtmlListItem('simple string'))
+    item.add_element(HtmlListItem(123))
+    item.add_element(HtmlListItem(Div()))
+    item.add_element(HtmlListItem(Paragraph()))
+    item.add_element(HtmlListItem(Link()))
+    item.add_element(HtmlListItem(Image()))
+    item.add_element(HtmlListItem(Blockquote()))
+    item.add_element(HtmlListItem(Bold('test')))
+    item.add_element(HtmlListItem(Strong('test')))
+    item.add_element(HtmlListItem(Italic('test')))
+    item.add_element(HtmlListItem(Emphasized('test')))
+    item.add_element(HtmlListItem(Marked('test')))
+    item.add_element(HtmlListItem(Smaller('test')))
+    item.add_element(HtmlListItem(Deleted('test')))
+    item.add_element(HtmlListItem(Inserted('test')))
+    item.add_element(HtmlListItem(Subscript('test')))
+    item.add_element(HtmlListItem(Superscript('test')))
+    item.add_element(HtmlListItem(Emoji('emojicode')))
+    doc.add_body_element(item)
 
     expected = []
     with open('tests/resources/document_simple_objects.html', 'r') as tf:
-        for line in tf.readlines():
-            expected.append(line[:-1])
-    expected = "\n".join(expected)
+        expected = tf.read()
     actual = doc.return_document
     assert actual == expected
+
 
 # def test_styles():
 #     doc = Document()

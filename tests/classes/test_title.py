@@ -5,8 +5,7 @@ import pytest
 def test_empty():
     item = Title()
     expected = [
-        '<title>',
-        '</title>',
+        '<title></title>',
     ]
     actual = item.return_document
     assert actual == expected

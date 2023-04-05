@@ -5,8 +5,7 @@ import pytest
 def test_empty():
     item = Header(1)
     expected = [
-        '<h1>',
-        '</h1>',
+        '<h1></h1>',
     ]
     actual = item.return_document
     assert actual == expected

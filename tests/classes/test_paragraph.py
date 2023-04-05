@@ -5,8 +5,7 @@ import pytest
 def test_empty():
     item = Paragraph()
     expected = [
-        '<p>',
-        '</p>',
+        '<p></p>',
     ]
     actual = item.return_document
     assert actual == expected
@@ -15,8 +14,7 @@ def test_simple_class():
     item = Paragraph()
     item.add_class(['testOne', 'testTwo'])
     expected = [
-        '<p class="testOne testTwo">',
-        '</p>',
+        '<p class="testOne testTwo"></p>',
     ]
     actual = item.return_document
     assert actual == expected
@@ -25,8 +23,7 @@ def test_simple_styles():
     item = Paragraph()
     item.add_style({'testOne': 'testTwo'})
     expected = [
-        '<p style="testOne: testTwo;">',
-        '</p>',
+        '<p style="testOne: testTwo;"></p>',
     ]
     actual = item.return_document
     assert actual == expected
@@ -36,8 +33,7 @@ def test_classes_and_styles():
     item.add_class(['testOne', 'testTwo'])
     item.add_style({'testOne': 'testTwo'})
     expected = [
-        '<p class="testOne testTwo" style="testOne: testTwo;">',
-        '</p>',
+        '<p class="testOne testTwo" style="testOne: testTwo;"></p>',
     ]
     actual = item.return_document
     assert actual == expected
@@ -60,10 +56,8 @@ def test_internal_object():
     item.internal.extend([d1, d2])
     expected = [
         '<p>',
-        '    <p>',
-        '    </p>',
-        '    <p>',
-        '    </p>',
+        '    <p></p>',
+        '    <p></p>',
         '</p>',
     ]
     actual = item.return_document

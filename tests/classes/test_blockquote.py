@@ -5,8 +5,7 @@ import pytest
 def test_empty():
     item = Blockquote()
     expected = [
-        '<blockquote>',
-        '</blockquote>',
+        '<blockquote></blockquote>',
     ]
     actual = item.return_document
     assert actual == expected
@@ -15,9 +14,9 @@ def test_simple_class():
     item = Blockquote()
     item.add_class(['testOne', 'testTwo'])
     expected = [
-        '<blockquote class="testOne testTwo">',
-        '</blockquote>',
+        '<blockquote class="testOne testTwo"></blockquote>',
     ]
+    ['<blockquote class="testOne testTwo" class="testOne testTwo"></blockquote>']
     actual = item.return_document
     assert actual == expected
 
@@ -25,8 +24,7 @@ def test_simple_styles():
     item = Blockquote()
     item.add_style({'testOne': 'testTwo'})
     expected = [
-        '<blockquote style="testOne: testTwo;">',
-        '</blockquote>',
+        '<blockquote style="testOne: testTwo;"></blockquote>',
     ]
     actual = item.return_document
     assert actual == expected
@@ -36,8 +34,7 @@ def test_classes_and_styles():
     item.add_class(['testOne', 'testTwo'])
     item.add_style({'testOne': 'testTwo'})
     expected = [
-        '<blockquote class="testOne testTwo" style="testOne: testTwo;">',
-        '</blockquote>',
+        '<blockquote class="testOne testTwo" style="testOne: testTwo;"></blockquote>',
     ]
     actual = item.return_document
     assert actual == expected
@@ -60,10 +57,8 @@ def test_internal_object():
     item.internal.extend([d1, d2])
     expected = [
         '<blockquote>',
-        '    <blockquote>',
-        '    </blockquote>',
-        '    <blockquote>',
-        '    </blockquote>',
+        '    <blockquote></blockquote>',
+        '    <blockquote></blockquote>',
         '</blockquote>',
     ]
     actual = item.return_document
