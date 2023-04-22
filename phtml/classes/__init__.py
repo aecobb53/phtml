@@ -40,3 +40,12 @@ from .iframe import IFrame
 from .noscript import Noscript
 from .comment import Comment
 from .style import Style
+from .form import Form
+from .input import Input
+from .label import Label
+from .select import Select
+from .option import Option
+from .textarea import Textarea
+from .fieldset import Fieldset, Legend
+from .datalist import Datalist
+from .output import Output

@@ -75,15 +75,18 @@ class Base:
             self.attributes['class'].extend(class_obj)
         else:
             self.attributes['class'].append(class_obj)
+        return self
 
     def add_style(self, style_obj):
         if not isinstance(style_obj, list):
             style_obj = [style_obj]
         for obj in style_obj:
             self.attributes['style'].append(obj)
+        return self
 
     def add_element(self, obj):
         self.internal.append(obj)
+        return self
 
     @property
     def return_document(self):

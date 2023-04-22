@@ -5,25 +5,25 @@ class Input(Base):
     def __init__(
         self,
         internal=None,
-        action
-        type
+        action=None,
+        type=None,
         **kwargs
     ):
         super().__init__(internal=internal, **kwargs)
         self.start_string = 'input'
         self.end_string = ''
 
-input - Created
+# input - Created
 
-label
-select
-option
-    outgroup
-textarea
-fieldset
-    legend
-datalist
-output
+# label
+# select
+# option
+#     outgroup
+# textarea
+# fieldset
+#     legend
+# datalist
+# output
 
 
-button - Created
+# button - Created

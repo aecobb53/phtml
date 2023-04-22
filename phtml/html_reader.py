@@ -37,16 +37,28 @@ from phtml import IFrame
 from phtml import Noscript
 from phtml import Comment
 from phtml import Style
+from phtml import (
+    Form,
+    Label,
+    Select,
+    Option,
+    Textarea,
+    Legend,
+    Datalist,
+    Output,
+)
 
 
 class HtmlReader:
     def __init__(self):
         pass
 
-    def read_file(self, filepath):
+    def read_file(self, filepath, all=False, index=0):
         with open(filepath, 'r') as hf:
             content = hf.read()
         contents = self.read_data(content)
+        if not all:
+            contents = contents[index]
         return contents
 
     def read_data(self, content, current_element=None):
@@ -274,6 +286,30 @@ class HtmlReader:
         elif tag == 'noscript':
             found = True
             element = Noscript(**tags_dict)
+        elif tag == 'form':
+            found = True
+            element = Form(**tags_dict)
+        elif tag == 'label':
+            found = True
+            element = Label(**tags_dict)
+        elif tag == 'select':
+            found = True
+            element = Select(**tags_dict)
+        elif tag == 'option':
+            found = True
+            element = Option(**tags_dict)
+        elif tag == 'textarea':
+            found = True
+            element = Textarea(**tags_dict)
+        elif tag == 'legend':
+            found = True
+            element = Legend(**tags_dict)
+        elif tag == 'datalist':
+            found = True
+            element = Datalist(**tags_dict)
+        elif tag == 'output':
+            found = True
+            element = Output(**tags_dict)
         elif tag == '!--':
             found = True
             element = Comment(**tags_dict)
