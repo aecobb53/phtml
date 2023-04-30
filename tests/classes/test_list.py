@@ -21,7 +21,9 @@ def test_ordered_HtmlList_empty():
 def test_HtmlListItem_item_empty():
     item = HtmlListItem(content='test', list_item=True)
     expected = [
-        '<li>test</li>'
+        '<li>',
+        '    test',
+        '</li>'
     ]
     actual = item.return_document
     assert actual == expected
@@ -29,7 +31,9 @@ def test_HtmlListItem_item_empty():
 def test_HtmlListItem_list_description_empty():
     item = HtmlListItem(content='test', list_description=True)
     expected = [
-        '<dl>test</dl>'
+        '<dl>',
+        '    test',
+        '</dl>'
     ]
     actual = item.return_document
     assert actual == expected
@@ -37,7 +41,9 @@ def test_HtmlListItem_list_description_empty():
 def test_HtmlListItem_term_description_empty():
     item = HtmlListItem(content='test', term_description=True)
     expected = [
-        '<dt>test</dt>'
+        '<dt>',
+        '    test',
+        '</dt>'
     ]
     actual = item.return_document
     assert actual == expected
@@ -45,7 +51,9 @@ def test_HtmlListItem_term_description_empty():
 def test_HtmlListItem_term_in_description_list_empty():
     item = HtmlListItem(content='test', term_in_description_list=True)
     expected = [
-        '<dd>test</dd>'
+        '<dd>',
+        '    test',
+        '</dd>'
     ]
     actual = item.return_document
     assert actual == expected
@@ -60,10 +68,18 @@ def test_unordered_HtmlList_with_items():
     ])
     expected = [
         '<ul>',
-        '    <li>one</li>',
-        '    <li>two</li>',
-        '    <li>three</li>',
-        '    <li>4</li>',
+        '    <li>',
+        '        one',
+        '    </li>',
+        '    <li>',
+        '        two',
+        '    </li>',
+        '    <li>',
+        '        three',
+        '    </li>',
+        '    <li>',
+        '        4',
+        '    </li>',
         '</ul>'
     ]
     actual = item.return_document
@@ -91,8 +107,12 @@ def test_List_with_ListItem():
     item.internal.append(HtmlListItem(Emoji('emojicode')))
     expected = [
         "<ul>",
-        "    <li>string</li>",
-        "    <li>123</li>",
+        "    <li>",
+        "        string",
+        "    </li>",
+        "    <li>",
+        "        123",
+        "    </li>",
         "    <li>",
         "        <div></div>",
         "    </li>",

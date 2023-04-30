@@ -16,7 +16,7 @@ class HtmlList(Base):
 class HtmlListItem(Base):
     def __init__(
         self,
-        content,
+        content=None,
         indent='    ',
         list_item=None,
         list_description=None,
@@ -37,55 +37,59 @@ class HtmlListItem(Base):
 
     @property
     def return_document(self):
+        x=1
+        if self.content is None:
+            if self.internal is None:
+                self.content = ''
+            else:
+                content = []
+                for internal in self.internal:
+                    content.append(internal)
+                self.content = content
+        if not isinstance(self.content, list):
+            self.content = [self.content]
         if self.list_item:
-            if isinstance(self.content, Base):
-                details = ['<li>']
-                for line in self.content.return_document:
-                    details.append(f"{self.indent}{line}")
-                details.append('</li>')
-            elif isinstance(self.content, TextFormat):
-                details = ['<li>']
-                details.append(f"{self.indent}{self.content.return_content}")
-                details.append('</li>')
-            else:
-                details = [f"<li>{self.content}</li>"]
+            details = ['<li>']
+            for content in self.content:
+                if isinstance(content, Base):
+                    for line in content.return_document:
+                        details.append(f"{self.indent}{line}")
+                elif isinstance(content, TextFormat):
+                    details.append(f"{self.indent}{content.return_content}")
+                else:
+                    details.append(f"{self.indent}{content}")
+            details.append('</li>')
         elif self.list_description:
-            if isinstance(self.content, Base):
-                details = ['<dl>']
-                for line in self.content.return_document:
-                    details.append(f"{self.indent}{line}")
-                details.append('</dl>')
-            elif isinstance(self.content, TextFormat):
-                details = ['<dl>']
-                for line in self.content.return_content:
-                    details.append(f"{self.indent}{line}")
-                details.append('</dl>')
-            else:
-                details = [f"<dl>{self.content}</dl>"]
+            details = ['<dl>']
+            for content in self.content:
+                if isinstance(content, Base):
+                    for line in content.return_document:
+                        details.append(f"{self.indent}{line}")
+                elif isinstance(content, TextFormat):
+                    details.append(f"{self.indent}{content.return_content}")
+                else:
+                    details.append(f"{self.indent}{content}")
+            details.append('</dl>')
         elif self.term_description:
-            if isinstance(self.content, Base):
-                details = ['<dt>']
-                for line in self.content.return_document:
-                    details.append(f"{self.indent}{line}")
-                details.append('</dt>')
-            elif isinstance(self.content, TextFormat):
-                details = ['<dt>']
-                for line in self.content.return_content:
-                    details.append(f"{self.indent}{line}")
-                details.append('</dt>')
-            else:
-                details = [f"<dt>{self.content}</dt>"]
+            details = ['<dt>']
+            for content in self.content:
+                if isinstance(self.content, Base):
+                    for line in content.return_document:
+                        details.append(f"{self.indent}{line}")
+                elif isinstance(content, TextFormat):
+                    details.append(f"{self.indent}{content.return_content}")
+                else:
+                    details.append(f"{self.indent}{content}")
+            details.append('</dt>')
         elif self.term_in_description_list:
-            if isinstance(self.content, Base):
-                details = ['<dd>']
-                for line in self.content.return_document:
-                    details.append(f"{self.indent}{line}")
-                details.append('</dd>')
-            elif isinstance(self.content, TextFormat):
-                details = ['<dd>']
-                for line in self.content.return_content:
-                    details.append(f"{self.indent}{line}")
-                details.append('</dd>')
-            else:
-                details = [f"<dd>{self.content}</dd>"]
+            details = ['<dd>']
+            for content in self.content:
+                if isinstance(content, Base):
+                    for line in content.return_document:
+                        details.append(f"{self.indent}{line}")
+                elif isinstance(content, TextFormat):
+                    details.append(f"{self.indent}{content.return_content}")
+                else:
+                    details.append(f"{self.indent}{content}")
+            details.append('</dd>')
         return details

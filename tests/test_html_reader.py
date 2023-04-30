@@ -3,10 +3,25 @@ import pytest
 
 # def test_setup():
 #     hr = HtmlReader()
-#     contents = hr.read_file(filepath='tests/resources/old_class_builds_for_manipulation.html')
+#     contents = hr.read_file(filepath='tests/resources/document_actual_html_page.html')
 #     with open('testdoc_deleteme.html', 'w') as hf:
 #         hf.write(contents[0].return_document)
 #     x=1
+
+def test_read_html_file():
+    hr = HtmlReader()
+    contents = hr.read_file(filepath='tests/resources/document_actual_html_page.html')
+
+def test_read_html_data():
+    hr = HtmlReader()
+    with open('tests/resources/document_actual_html_page.html', 'r') as hf:
+        content = hf.read()
+    content = '<ol>    <li>1 Janja GARNBRET SLO</li>    <li>2 Chaehyun SEO KOR</li>    <li>3 Natalia GROSSMAN USA</li>    <li>4 Laura ROGORA ITA</li>    <li>5 Brooke RABOUTOU USA</li></ol>'
+    x=1
+    contents = hr.read_data(content, all=False)
+    x=1
+    a = contents.return_document
+    x=1
 
 def test_read_file():
     hr = HtmlReader()

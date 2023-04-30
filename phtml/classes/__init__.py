@@ -1,51 +1,45 @@
-from phtml.classes.base import Base
-from phtml.classes.iframe import IFrame
-from .blockquote import (
-    Blockquote,
-    Inlinequote,
-)
-from .div import Div
-from .header import Header
-from .html_list import (
-    HtmlList,
-    HtmlListItem,
-)
-from .image import Image
-from .link import Link
-from .hyper_link import HyperLink
-from .paragraph import Paragraph
-from .title import Title
+from .base import Base
+from .blockquote import Blockquote
+from .blockquote import Inlinequote
 from .button import Button
-from .text_format import (
-    TextFormat,
-    LineBreak,
-    Bold,
-    Strong,
-    Italic,
-    Emphasized,
-    Marked,
-    Smaller,
-    Deleted,
-    Inserted,
-    Subscript,
-    Superscript,
-    Emoji,
-)
-from .span import Span
-from .svg import Svg, SubParameter
 from .canvas import Canvas
-from .meta import Meta
-from .input import Input
-from .iframe import IFrame
-from .noscript import Noscript
 from .comment import Comment
-from .style import Style
+from .datalist import Datalist
+from .div import Div
+from .fieldset import Fieldset
+from .fieldset import Legend
 from .form import Form
+from .header import Header
+from .html_list import HtmlList
+from .html_list import HtmlListItem
+from .hyper_link import HyperLink
+from .iframe import IFrame
+from .image import Image
 from .input import Input
 from .label import Label
-from .select import Select
+from .link import Link
+from .meta import Meta
+from .noscript import Noscript
 from .option import Option
-from .textarea import Textarea
-from .fieldset import Fieldset, Legend
-from .datalist import Datalist
 from .output import Output
+from .paragraph import Paragraph
+from .select import Select
+from .span import Span
+from .style import Style
+from .svg import Svg
+from .svg import SubParameter
+from .text_format import TextFormat
+from .text_format import LineBreak
+from .text_format import Bold
+from .text_format import Strong
+from .text_format import Italic
+from .text_format import Emphasized
+from .text_format import Marked
+from .text_format import Smaller
+from .text_format import Deleted
+from .text_format import Inserted
+from .text_format import Subscript
+from .text_format import Superscript
+from .text_format import Emoji
+from .textarea import Textarea
+from .title import Title

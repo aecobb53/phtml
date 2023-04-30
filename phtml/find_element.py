@@ -13,7 +13,7 @@ class FindElement:
 
     def read_file(self, path):
         hr = HtmlReader()
-        self.html_content = hr.read_file(filepath=path)[0]
+        self.html_content = hr.read_file(filepath=path)
         return self.html_content
 
     def find_elements(self, obj, element_type, **kwargs):
