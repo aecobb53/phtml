@@ -12,6 +12,10 @@ def test_internal():
     actual = item.return_document
     assert actual == expected
 
+def test_return_not_none():
+    item = Base().add_class('test_one')
+    assert item != None
+
 # class DivTest(TestCase):
 #     def test_setup(self):
 #         d = Div()

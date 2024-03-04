@@ -80,3 +80,7 @@ def test_return_string_version():
     expected = '<div class="testOne testTwo" style="testOne: testTwo;">test on the inside</div>'
     actual = item.return_string_version
     assert expected == actual
+
+def test_return_not_none():
+    item = Div().add_class('test_one')
+    assert item != None
