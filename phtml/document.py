@@ -13,12 +13,15 @@ class Document:
 
     def add_head_element(self, obj):
         self.body.append(obj)
+        return self
 
     def add_body_element(self, obj):
         self.body.append(obj)
+        return self
 
     def set_indent_width(self, width=4):
         self.indent = ' ' * width
+        return self
 
     @property
     def return_document(self):
@@ -44,6 +47,7 @@ class Document:
             style_obj = [style_obj]
         for obj in style_obj:
             self.styles.append(obj)
+        return self
 
     def create_details_list(self, lst):
         details = []
