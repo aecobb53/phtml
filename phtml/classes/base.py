@@ -61,7 +61,7 @@ class Base:
             self.attributes[key] = value
 
         self.internal = []
-        if internal:
+        if internal is not None:
             if isinstance(internal, list):
                 self.internal.extend(internal)
             else:

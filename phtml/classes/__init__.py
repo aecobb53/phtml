@@ -40,3 +40,8 @@ from .iframe import IFrame
 from .noscript import Noscript
 from .comment import Comment
 from .style import Style
+from .table import (Table,
+    TableRow,
+    TableHeader,
+    TableData,
+)
