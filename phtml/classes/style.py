@@ -24,12 +24,6 @@ class Style:
         style += '}'
         return style
 
-    # @property
-    # def return_object_version(self):
-    #     content = ';'.join([f'{k}:{v}' for k, v in self.styles.items()])
-    #     style = f'style="{content}"'
-    #     return style
-
 
 # descendant
 # child

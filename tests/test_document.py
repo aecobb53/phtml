@@ -97,7 +97,7 @@ def test_simple_objects():
     unordered_html_list.add_element(HtmlListItem('unordered list item 1'))
     doc.add_body_element(unordered_html_list)
 
-    ####doc.add_body_element(HyperLink(internal='hyperlink test', href='https://www.google.com'))
+    doc.add_body_element(HyperLink(internal='hyperlink test', href='https://www.google.com'))
     doc.add_body_element(IFrame(src='https://www.google.com'))
     doc.add_body_element(Input('input test'))
     doc.add_body_element(Link('link test'))
@@ -175,7 +175,7 @@ def test_simple_objects():
                 print(f"[{el}]")
         assert type(doc.body[index]) == type(el)
         
-    1/0
+    # 1/0
 
 
 

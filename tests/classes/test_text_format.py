@@ -23,67 +23,67 @@ def test_LineBreak():
     assert actual == expected
 
 def test_Bold():
-    item = Bold(content='test')
+    item = Bold(internal='test')
     expected = '<b>test</b>'
     actual = item.return_content
     assert actual == expected
 
 def test_Strong():
-    item = Strong(content='test')
+    item = Strong(internal='test')
     expected = '<strong>test</strong>'
     actual = item.return_content
     assert actual == expected
 
 def test_Italic():
-    item = Italic(content='test')
+    item = Italic(internal='test')
     expected = '<i>test</i>'
     actual = item.return_content
     assert actual == expected
 
 def test_Emphasized():
-    item = Emphasized(content='test')
+    item = Emphasized(internal='test')
     expected = '<em>test</em>'
     actual = item.return_content
     assert actual == expected
 
 def test_Marked():
-    item = Marked(content='test')
+    item = Marked(internal='test')
     expected = '<mark>test</mark>'
     actual = item.return_content
     assert actual == expected
 
 def test_Smaller():
-    item = Smaller(content='test')
+    item = Smaller(internal='test')
     expected = '<small>test</small>'
     actual = item.return_content
     assert actual == expected
 
 def test_Deleted():
-    item = Deleted(content='test')
+    item = Deleted(internal='test')
     expected = '<del>test</del>'
     actual = item.return_content
     assert actual == expected
 
 def test_Inserted():
-    item = Inserted(content='test')
+    item = Inserted(internal='test')
     expected = '<ins>test</ins>'
     actual = item.return_content
     assert actual == expected
 
 def test_Subscript():
-    item = Subscript(content='test')
+    item = Subscript(internal='test')
     expected = '<sub>test</sub>'
     actual = item.return_content
     assert actual == expected
 
 def test_Superscript():
-    item = Superscript(content='test')
+    item = Superscript(internal='test')
     expected = '<sup>test</sup>'
     actual = item.return_content
     assert actual == expected
 
 def test_Emoji():
-    item = Emoji(content='testcode')
+    item = Emoji(internal='testcode')
     expected = 'testcode'
     actual = item.return_content
     assert actual == expected

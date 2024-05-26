@@ -176,12 +176,12 @@ class TagMapping:
             "tag_start": "dd",
             "tag_end": "dd"
         },
-        # "link": {
-        #     "file": "hyper_link",
-        #     "class": "HyperLink",
-        #     "tag_start": "link",
-        #     "tag_end": "link"
-        # },
+        "link": {
+            "file": "hyper_link",
+            "class": "HyperLink",
+            "tag_start": "link",
+            "tag_end": None
+        },
         "iframe": {
             "file": "iframe",
             "class": "IFrame",
@@ -235,6 +235,12 @@ class TagMapping:
             "class": "Span",
             "tag_start": "span",
             "tag_end": "span"
+        },
+        "style": {
+            "file": "style_tag",
+            "class": "StyleTag",
+            "tag_start": "style",
+            "tag_end": "style"
         },
         "svg": {
             "file": "svg",
