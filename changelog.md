@@ -9,3 +9,6 @@
 
 ### 1.1.0
 - Added table html element
+
+### 2.0.0
+- Full refactor of html_reader which could be breaking

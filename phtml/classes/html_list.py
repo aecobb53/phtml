@@ -16,7 +16,7 @@ class HtmlList(Base):
 class HtmlListItem(Base):
     def __init__(
         self,
-        content,
+        content=None,
         indent='    ',
         list_item=None,
         list_description=None,

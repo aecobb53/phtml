@@ -4,12 +4,12 @@ from phtml.classes.base import Base
 class IFrame(Base):
     def __init__(
         self,
+        internal=None,
         src=None,
         title=None,
         height=None,
         width=None,
         border=None,
-        internal=None,
         **kwargs
     ):
         super().__init__(internal=internal, **kwargs)

@@ -215,18 +215,18 @@ You can use `FindElement` to search for element types. Each search will return e
 
 
 TODO: 
-- [ ] Add classes
+- [X] Add classes
     - [X] Comment
-    - [ ] Form
-    - [ ] Table
+    - [X] Form
+    - [X] Table
 - [X] If attribute value is None, reutrn just the key like button's autofocus
 - [ ] Look into adding style references
     (descendant, child, adjacent, general)
-- [ ] Verify html_parser reads text_alterations like bold
+- [X] Verify html_parser reads text_alterations like bold
 - [X] Verify each class has the appropriate parameters in the init
-- [ ] Integrate scripts
+- [X] Integrate scripts
     - [ ] Learn more about JS/TS
-    - [ ] Implement script adding
+    - [X] Implement script adding
 
 
 

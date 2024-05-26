@@ -61,7 +61,7 @@ class Document:
             else:
                 if item.strip() == '':
                     continue
-                details.append(item)
+                details.append(f"{self.indent}{item}")
         return details
 
     def creatre_styles_list(self):
@@ -69,7 +69,7 @@ class Document:
         details.append('<style>')
         for style in self.styles:
             if not isinstance(style, Style):
-                details.append(style)
+                details.append(style.return_string_version)
                 continue
             for line in style.return_content:
                 details.append(f"{self.indent}{line}")

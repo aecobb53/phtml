@@ -13,6 +13,8 @@ class FindElement:
 
     def read_file(self, path):
         hr = HtmlReader()
+        print('HTML STUFF')
+        print(hr.read_file(filepath=path))
         self.html_content = hr.read_file(filepath=path)[0]
         return self.html_content
 

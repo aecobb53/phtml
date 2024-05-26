@@ -19,7 +19,7 @@ class HyperLink(Base):
     ):
         super().__init__(internal=internal, **kwargs)
         self.start_string = 'link'
-        self.end_string = 'link'
+        self.end_string = None
         self.attributes['href'] = '#'
 
         if crossorigin is not None:
