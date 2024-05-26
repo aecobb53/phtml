@@ -5,7 +5,6 @@ class Button(Base):
     def __init__(
         self,
         internal=None,
-        autofocus=None,
         disabled=None,
         form=None,
         formaction=None,
@@ -21,9 +20,6 @@ class Button(Base):
         super().__init__(internal=internal, **kwargs)
         self.start_string = 'button'
         self.end_string = 'button'
-
-        if autofocus is not None:
-            self.attributes['autofocus'] = None
 
         if disabled is not None:
             self.attributes['disabled'] = None

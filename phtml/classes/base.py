@@ -5,6 +5,7 @@ from .style import Style
 class Base:
     def __init__(
         self,
+        autofocus=None,
         accesskey=None,
         contenteditable=None,
         dir=None,
@@ -23,6 +24,10 @@ class Base:
             'class': [],
             'style': [],
         }
+
+        if autofocus is not None:
+            if autofocus:
+                self.attributes['autofocus'] = None
 
         if accesskey is not None:
             self.attributes['accesskey'] = accesskey
@@ -78,6 +83,14 @@ class Base:
         return self
 
     def add_style(self, style_obj):
+        if isinstance(style_obj, str):
+            style_obj_list = []
+            for obj in style_obj.split(';'):
+                if obj != '':
+                    obj = obj.strip()
+                    k, v = obj.split(':')
+                    style_obj_list.append({k :v})
+            style_obj = style_obj_list
         if not isinstance(style_obj, list):
             style_obj = [style_obj]
         for obj in style_obj:

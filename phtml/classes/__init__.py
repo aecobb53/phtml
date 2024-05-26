@@ -1,5 +1,8 @@
-from phtml.classes.base import Base
-from phtml.classes.iframe import IFrame
+from .base import Base
+from .body import Body
+from .head import Head
+from .html import Html
+from .iframe import IFrame
 from .blockquote import (
     Blockquote,
     Inlinequote,
@@ -45,3 +48,12 @@ from .table import (Table,
     TableHeader,
     TableData,
 )
+from .form import (Form,
+    Textarea,
+    Select,
+    Option,
+    Optiongroup,
+    Fieldset,
+    Label,
+    Output)
+from .script import Script

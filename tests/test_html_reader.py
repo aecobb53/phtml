@@ -35,3 +35,5 @@ def test_read_file():
 #     path1 = 'deleteme2.html'
 #     with open(path1, 'w') as hf:
 #         hf.write(contents2.return_document)
+
+# ['span.py', 'script.py', 'input.py', 'meta.py', 'noscript.py', 'comment.py', 'svg.py', 'form.py', 'canvas.py', 'iframe.py']
