@@ -1,22 +1,30 @@
-from phtml.classes.base import Base
-from phtml.classes.text_format import TextFormat
-from phtml.classes.style import Style
+from . import Base
+from . import Html
+from . import Head
+from . import Body
+from . import TextFormat
+from . import Style
 
 
 class Document:
-    def __init__(self, **kwargs):
-        self.head = []
-        self.body = []
+    def __init__(self, html: Html = None, head: Head = None, body: Body = None, **kwargs):
+        self.html = html
+        self.head = head
+        self.body = body
+        if not self.html and not self.head:
+            self.head = Head()
+        if not self.html and not self.body:
+            self.body = Body()
         self.styles = []
         self.scripts = []
         self.indent = '    '
 
     def add_head_element(self, obj):
-        self.body.append(obj)
+        self.head.add_element(obj)
         return self
 
     def add_body_element(self, obj):
-        self.body.append(obj)
+        self.body.add_element(obj)
         return self
 
     def set_indent_width(self, width=4):
@@ -27,19 +35,13 @@ class Document:
     def return_document(self):
         details = []
         details.append('<!DOCTYPE html>')
-        details.append('<html>')
-        details.append('<head>')
-        for line in self.create_details_list(lst=self.head):
-            details.append(line)
-        details.append('</head>')
-        details.append('<body>')
-        for line in self.create_details_list(lst=self.body):
-            details.append(line)
-        if self.styles:
-            for line in self.creatre_styles_list():
-                details.append(f"{self.indent}{line}")
-        details.append('</body>')
-        details.append('</html>')
+        if self.html:
+            details.extend(self.head.return_document)
+        else:
+            details.append('<html>')
+            details.extend(self.head.return_document)
+            details.extend(self.body.return_document)
+            details.append('</html>')
         return '\n'.join(details)
 
     def add_style(self, style_obj):

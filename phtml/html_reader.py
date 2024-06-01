@@ -90,16 +90,21 @@ class HtmlReader:
         if is_document:
             # Assuming the contents is a list of a single element that is a html tag
             kwargs = {}
+            internal_html = Html()
             for i in contents[0].internal:
                 if isinstance(i, Head):
-                    kwargs['head'] = i.internal
+                    kwargs['head'] = i
+                    internal_html.add_element(i)
                 elif isinstance(i, Body):
-                    kwargs['body'] = i.internal
+                    kwargs['body'] = i
+                    internal_html.add_element(i)
                 elif isinstance(i, Style):
                     kwargs['styles'] = i
+                    internal_html.add_style(i)
                 elif isinstance(i, Script):
                     kwargs['scripts'] = i
-            contents = [Document(**kwargs)]
+                    internal_html.add_element(i)
+            contents = [Document(html=internal_html)]
         return contents
 
     def find_next_element(self, remaining_content, current_content='', current_element=None):
@@ -154,7 +159,6 @@ class HtmlReader:
                     remaining_content = remaining_content.strip()
                     break
             if 'class=' in tag_info:
-                print(tag_info)
                 class_re_match = re.search(r'class="([^"]+)"', tag_info)
                 if class_re_match:
                     class_info = class_re_match.groups()[0]
@@ -163,7 +167,6 @@ class HtmlReader:
             else:
                 class_info = None
             if 'style=' in tag_info:
-                print(tag_info)
                 style_re_match = re.search(r'style="([^"]+)"', tag_info)
                 if style_re_match:
                     style_info = style_re_match.groups()[0]
