@@ -12,3 +12,7 @@
 
 ### 2.0.0
 - Full refactor of html_reader which could be breaking
+
+### 3.0.0
+- Full refactor of Document adding the concept of html, head, and body elements
+  It should be backwards compatible but im not 100% sure
