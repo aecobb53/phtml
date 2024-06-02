@@ -16,3 +16,6 @@
 ### 3.0.0
 - Full refactor of Document adding the concept of html, head, and body elements
   It should be backwards compatible but im not 100% sure
+
+### 3.1.0
+- Better style control for the document

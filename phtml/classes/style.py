@@ -1,5 +1,8 @@
+from typing import Dict
+
+
 class Style:
-    def __init__(self, style_details, name=None):
+    def __init__(self, style_details: Dict, name=None):
         self.name = name
         self.styles = style_details
         self.indent = '    '

@@ -1,4 +1,3 @@
-from sys import intern
 from phtml import Document
 from phtml import HtmlReader
 from phtml import Style
@@ -53,11 +52,14 @@ from phtml import Title
 from unittest import TestCase
 import pytest
 
+from phtml.classes.style_tag import StyleTag
+
 
 def test_empty():
     doc = Document()
     expected = '<!DOCTYPE html>\n<html>\n<head></head>\n<body></body>\n</html>'
     actual = doc.return_document
+    print(actual)
     assert actual == expected
 
 def test_simple_objects():
@@ -134,7 +136,7 @@ def test_simple_objects():
     doc.add_body_element(Title('title test'))
     doc.add_body_element(paragraph)
 
-
+    doc.add_head_element(StyleTag('background-color: red; color: green;', name='body'))
 
     expected = []
     saved_file_path = 'tests/resources/document_simple_objects.html'
@@ -150,23 +152,29 @@ def test_simple_objects():
     content = hr.read_file(saved_file_path)[0]
     print('BACK IN TEST FILE')
     print(content)
-    print(f"html: {str(content.html)[:50]}")
-    print(f"head: {str(content.head)[:50]}")
-    print(f"body: {str(content.body)[:50]}")
-    print(type(content.body))
+    print(f" content html: {str(content.html)}")
+    print(f" content head: {str(content.head)}")
+    print(f" content body: {str(content.body)}")
+    if content.html:
+        print(f"Content html head: {content.html.internal[0]}")
+        print(f"    internal length: {len(content.html.internal[0].internal)}")
+        print(f"Content html body: {content.html.internal[1]}")
+        print(f"    internal length: {len(content.html.internal[1].internal)}")
     body = []
     for el in content.html.internal[1].internal:
         if isinstance(el, Base):
             body.append(el)
         elif isinstance(el, str) and el.strip() != '':
             body.append(el)
+    print(f"BODY: [{body}]")
     for index, el in enumerate(body):
-        if type(el) != type(doc.body.internal[index]):
+        print(f"INDEX: [{index}], EL: [{el}]")
+        if type(el) != type(doc.html.internal[1].internal[index]):
             print('')
             print(f"-{el}-")
-            print(f'Expected type: {type(doc.body.internal[index])}')
+            print(f'Expected type: {type(doc.html.internal[1].internal[index])}')
             print(f'Got type: {type(el)}')
             print('')
             print('Expected details')
-            print(f"[{doc.body.internal[index].__dict__}]")
+            print(f"[{doc.html.internal[1].internal[index].__dict__}]")
             print('Got details')
