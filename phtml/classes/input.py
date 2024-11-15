@@ -2,8 +2,11 @@ from phtml.classes.base import Base
 
 
 class Input(Base):
-    def __init__(self, internal=None, **kwargs):
+    def __init__(self, internal=None, value=None, **kwargs):
         internal = None  # There is no internal content for the input tag
         super().__init__(internal=internal, **kwargs)
         self.start_string = 'input'
         self.end_string = None
+
+        if value is not None:
+            self.attributes['value'] = value
