@@ -7,6 +7,3 @@ class Input(Base):
         super().__init__(internal=internal, **kwargs)
         self.start_string = 'input'
         self.end_string = None
-
-        if value is not None:
-            self.attributes['value'] = value

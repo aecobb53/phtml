@@ -19,3 +19,6 @@
 
 ### 3.1.0
 - Better style control for the document
+
+### 3.1.0
+- Favicon implementation

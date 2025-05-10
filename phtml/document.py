@@ -4,6 +4,7 @@ from . import Head
 from . import Body
 from . import TextFormat
 from . import Style
+from . import HyperLink
 
 
 class Document:
@@ -64,6 +65,10 @@ class Document:
                 self.body.add_style(obj)
             # self.styles.append(obj)
         return self
+
+    def add_favicon(self, image_path):
+        favicon = HyperLink(rel='icon', href=image_path, type='image/x-icon')
+        self.add_head_element(favicon)
 
     # def create_details_list(self, lst):
     #     details = []
