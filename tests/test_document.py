@@ -151,16 +151,14 @@ def test_simple_objects():
     content = hr.read_file(saved_file_path)[0]
     print('BACK IN TEST FILE')
     print(content)
-    print(f" content html: {str(content.html)}")
     print(f" content head: {str(content.head)}")
     print(f" content body: {str(content.body)}")
-    if content.html:
-        print(f"Content html head: {content.html.internal[0]}")
-        print(f"    internal length: {len(content.html.internal[0].internal)}")
-        print(f"Content html body: {content.html.internal[1]}")
-        print(f"    internal length: {len(content.html.internal[1].internal)}")
+    print(f"Content html head: {content.head}")
+    print(f"    internal length: {len(content.head.internal)}")
+    print(f"Content html body: {content.body}")
+    print(f"    internal length: {len(content.body.internal)}")
     body = []
-    for el in content.html.internal[1].internal:
+    for el in content.body.internal:
         if isinstance(el, Base):
             body.append(el)
         elif isinstance(el, str) and el.strip() != '':
@@ -177,3 +175,19 @@ def test_simple_objects():
             print('Expected details')
             print(f"[{doc.html.internal[1].internal[index].__dict__}]")
             print('Got details')
+
+def test_load_css_file():
+    doc = Document()
+    doc.load_css_file(file_path='/home/acobb/git/expense_parser/expense_parser/css/expenseReport.css')
+    a = doc.return_document
+    with open('/home/acobb/deleteme.html', 'w') as tf:
+        tf.write(a)
+    x=1
+
+def test_load_js_file():
+    doc = Document()
+    doc.load_js_file(file_path='/home/acobb/git/expense_parser/expense_parser/js/toggleTable.js')
+    a = doc.return_document
+    with open('/home/acobb/deleteme.html', 'w') as tf:
+        tf.write(a)
+    x=1

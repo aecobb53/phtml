@@ -4,38 +4,31 @@ from . import Head
 from . import Body
 from . import TextFormat
 from . import Style
+from . import Script
 from . import HyperLink
+import re
 
 
 class Document:
-    def __init__(self, html: Html = None, head: Head = None, body: Body = None, **kwargs):
-        self.html = html
+    def __init__(self, head: Head = None, body: Body = None, **kwargs):
         self.head = head
         self.body = body
-        if not self.html and not self.head and not self.body:
-            self.html = Html(
-                internal=[Head(), Body()]
-            )
-        if not self.html and not self.head:
+
+        if not self.head:
             self.head = Head()
-        if not self.html and not self.body:
+        if not self.body:
             self.body = Body()
+
         self.styles = []
         self.scripts = []
         self.indent = '    '
 
     def add_head_element(self, obj):
-        if self.html:
-            self.html.internal[0].add_element(obj)
-        else:
-            self.head.add_element(obj)
+        self.head.add_element(obj)
         return self
 
     def add_body_element(self, obj):
-        if self.html:
-            self.html.internal[1].add_element(obj)
-        else:
-            self.body.add_element(obj)
+        self.body.add_element(obj)
         return self
 
     def set_indent_width(self, width=4):
@@ -46,53 +39,43 @@ class Document:
     def return_document(self):
         details = []
         details.append('<!DOCTYPE html>')
-        if self.html:
-            details.extend(self.html.return_document)
-        else:
-            details.append('<html>')
-            details.extend(self.head.return_document)
-            details.extend(self.body.return_document)
-            details.append('</html>')
+        html_element = Html(internal=[self.head, self.body])
+        details.extend(html_element.return_document)
         return '\n'.join(details)
 
-    def add_style(self, style_obj):
-        if not isinstance(style_obj, list):
-            style_obj = [style_obj]
-        for obj in style_obj:
-            if self.html:
-                self.html.internal[1].add_style(obj)
-            else:
-                self.body.add_style(obj)
-            # self.styles.append(obj)
+    def add_style(self, style_obj: Style):
+        self.head.add_global_style(style_obj)
         return self
 
     def add_favicon(self, image_path):
         favicon = HyperLink(rel='icon', href=image_path, type='image/x-icon')
         self.add_head_element(favicon)
 
-    # def create_details_list(self, lst):
-    #     details = []
-    #     for item in lst:
-    #         x=1
-    #         if isinstance(item, TextFormat):
-    #             details.append(f"{self.indent}{item.return_content}")
-    #         elif isinstance(item, Base):
-    #             for line in item.return_document:
-    #                 details.append(f"{self.indent}{line}")
-    #         else:
-    #             if item.strip() == '':
-    #                 continue
-    #             details.append(f"{self.indent}{item}")
-    #     return details
+    def load_css_file(self, file_path):
+        with open(file_path, 'r') as cf:
+            css_file_content = cf.read()
+        css_elements = re.findall(r'([^{]+)\{([^}]+)\}', re.sub(r'/\*.*?\*/', '', css_file_content, flags=re.DOTALL))
+        for element in css_elements:
+            selector = element[0].strip()
+            styles = element[1].strip().split(';')
+            style_details = {}
+            for style in styles:
+                if style.strip() == '':
+                    continue
+                key, value = style.split(':')
+                style_details[key.strip()] = value.strip()
+            style_obj = Style(style_details=style_details, name=selector)
+            self.add_style(style_obj)
+        return self
 
-    # def create_styles_list(self):
-    #     details = []
-    #     details.append('<style>')
-    #     for style in self.styles:
-    #         if not isinstance(style, Style):
-    #             details.append(style.return_string_version)
-    #             continue
-    #         for line in style.return_content:
-    #             details.append(f"{self.indent}{line}")
-    #     details.append('</style>')
-    #     return details
+    def load_js_file(self, file_path):
+        x=1
+        js_file_content = []
+        with open(file_path, 'r') as jf:
+            for line in jf:
+                js_file_content.append(line.rstrip())
+        js_element = Script(internal=js_file_content)
+        self.add_body_element(js_element)
+        return self
+
+

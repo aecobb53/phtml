@@ -138,13 +138,20 @@ class Base:
                 if isinstance(internal, Base):
                     for item in internal.return_document:
                         details.append(self.indent + item)
+                elif isinstance(internal, Style):
+                    for item in internal.return_content:
+                        details.append(self.indent + item)
                 elif isinstance(internal, TextFormat):
                     details.append(self.indent + internal.return_content)
                 else:
                     try:
-                        if internal.strip() == '':
-                            continue
-                        details.append(self.indent + internal.strip())
+                        if self.start_string == 'script':
+                            # Special case
+                            details.append(self.indent + internal)
+                        else:
+                            if internal.strip() == '':
+                                continue
+                            details.append(self.indent + internal.strip())
                     except:
                         details.append(self.indent + str(internal).strip())
         if self.end_string:

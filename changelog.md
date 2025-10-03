@@ -25,3 +25,6 @@
 
 ### 3.1.2
 - Single line if length under 50 char
+
+### 3.1.3
+- Load css and js files
