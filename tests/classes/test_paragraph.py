@@ -42,23 +42,18 @@ def test_simple_internal():
     item = Paragraph()
     item.internal.append('test on the inside')
     expected = [
-        '<p>',
-        '    test on the inside',
-        '</p>',
+        '<p>test on the inside</p>',
     ]
     actual = item.return_document
     assert actual == expected
-    
+
 def test_internal_object():
     item = Paragraph()
     d1 = Paragraph()
     d2 = Paragraph()
     item.internal.extend([d1, d2])
     expected = [
-        '<p>',
-        '    <p></p>',
-        '    <p></p>',
-        '</p>',
+        '<p><p></p><p></p></p>',
     ]
     actual = item.return_document
     assert actual == expected

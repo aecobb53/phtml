@@ -13,9 +13,7 @@ def test_empty():
 def test_content():
     item = Header(2, 'HEADER')
     expected = [
-        '<h2>',
-        '    HEADER',
-        '</h2>',
+        '<h2>HEADER</h2>',
     ]
     actual = item.return_document
     assert actual == expected
@@ -24,9 +22,7 @@ def test_content_class():
     item = Header(2, 'HEADER')
     item.add_class('test')
     expected = [
-        '<h2 class="test">',
-        '    HEADER',
-        '</h2>',
+        '<h2 class="test">HEADER</h2>',
     ]
     actual = item.return_document
     assert actual == expected

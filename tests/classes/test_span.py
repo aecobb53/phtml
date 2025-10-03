@@ -13,9 +13,7 @@ def test_empty():
 def test_content():
     item = Span('CONTENT')
     expected = [
-        '<span>',
-        '    CONTENT',
-        '</span>',
+        '<span>CONTENT</span>',
     ]
     actual = item.return_document
     assert actual == expected

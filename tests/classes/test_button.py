@@ -42,9 +42,7 @@ def test_simple_internal():
     item = Button()
     item.internal.append('test on the inside')
     expected = [
-        '<button>',
-        '    test on the inside',
-        '</button>',
+        '<button>test on the inside</button>',
     ]
     actual = item.return_document
     assert actual == expected
@@ -53,9 +51,7 @@ def test_autofocus():
     item = Button(autofocus=True)
     item.internal.append('test on the inside')
     expected = [
-        '<button autofocus>',
-        '    test on the inside',
-        '</button>',
+        '<button autofocus>test on the inside</button>',
     ]
     actual = item.return_document
     assert actual == expected

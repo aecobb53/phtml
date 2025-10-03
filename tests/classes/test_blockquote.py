@@ -42,11 +42,7 @@ def test_classes_and_styles():
 def test_simple_internal():
     item = Blockquote()
     item.internal.append('test on the inside')
-    expected = [
-        '<blockquote>',
-        '    test on the inside',
-        '</blockquote>',
-    ]
+    expected = ['<blockquote>test on the inside</blockquote>']
     actual = item.return_document
     assert actual == expected
 

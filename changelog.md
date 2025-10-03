@@ -20,5 +20,8 @@
 ### 3.1.0
 - Better style control for the document
 
-### 3.1.0
+### 3.1.1
 - Favicon implementation
+
+### 3.1.2
+- Single line if length under 50 char

@@ -152,10 +152,12 @@ class Base:
                 details.append(f'{self.end_string}>')
             else:
                 details.append(f'</{self.end_string}>')
-        if len(details) < 3:
-            x=1
-            if len(details[0]) < 100:
-                details = [''.join(details)]
+        if sum([len(item) for item in details]) <= 50 or len(details) < 3:
+            for internal_index in range(len(details[1:-1])):
+                # Need to remove the indentation
+                internal_element = details[internal_index + 1]
+                details[internal_index + 1] = internal_element[len(self.indent):]
+            details = [''.join(details)]
         return details
 
     @property

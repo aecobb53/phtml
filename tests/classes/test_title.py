@@ -13,9 +13,7 @@ def test_empty():
 def test_not_empty():
     item = Title(internal='TITLE')
     expected = [
-        '<title>',
-        '    TITLE',
-        '</title>',
+        '<title>TITLE</title>',
     ]
     actual = item.return_document
     assert actual == expected

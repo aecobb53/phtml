@@ -13,9 +13,7 @@ def test_empty():
 def test_content():
     item = Noscript('CONTENT')
     expected = [
-        '<noscript>',
-        '    CONTENT',
-        '</noscript>',
+        '<noscript>CONTENT</noscript>',
     ]
     actual = item.return_document
     assert actual == expected

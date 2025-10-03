@@ -57,9 +57,8 @@ from phtml.classes.style_tag import StyleTag
 
 def test_empty():
     doc = Document()
-    expected = '<!DOCTYPE html>\n<html>\n<head></head>\n<body></body>\n</html>'
+    expected = '<!DOCTYPE html>\n<html><head></head><body></body></html>'
     actual = doc.return_document
-    print(actual)
     assert actual == expected
 
 def test_simple_objects():

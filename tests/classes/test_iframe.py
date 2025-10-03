@@ -13,9 +13,7 @@ def test_empty():
 def test_content():
     item = IFrame('CONTENT')
     expected = [
-        '<iframe>',
-        '    CONTENT',
-        '</iframe>',
+        '<iframe>CONTENT</iframe>',
     ]
     actual = item.return_document
     assert actual == expected

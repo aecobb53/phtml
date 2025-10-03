@@ -13,9 +13,7 @@ def test_empty():
 def test_content():
     item = Comment('CONTENT')
     expected = [
-        '<!--',
-        '    CONTENT',
-        '-->',
+        '<!--CONTENT-->',
     ]
     actual = item.return_document
     assert actual == expected

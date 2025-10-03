@@ -29,9 +29,7 @@ def test_subparameter_both_empty():
 def test_content():
     item = Svg('CONTENT')
     expected = [
-        '<svg>',
-        '    CONTENT',
-        '</svg>',
+        '<svg>CONTENT</svg>',
     ]
     actual = item.return_document
     assert actual == expected
