@@ -1,8 +1,72 @@
+"""
+base.py
+
+This module defines the Base class, which serves as the foundational class for all HTML elements in the phtml library.
+It provides common functionality for attribute management, internal content handling, and HTML generation.
+
+Classes:
+    Base: The main class for representing HTML elements, supporting attributes, styles, classes, and nested content.
+
+Usage:
+    The Base class is intended to be subclassed by specific HTML element classes. It offers methods for adding classes,
+    styles, and internal elements, as well as generating HTML output and extracting text content.
+"""
+
+from typing import Any
+
 from .text_format import TextFormat
 from .style import Style
 
 
+
 class Base:
+    """
+    Base class for all elements.
+    This class provides common functionality for HTML elements, including
+    attribute management, internal content handling, and HTML generation.
+
+    Attributes:
+        attributes (dict): A dictionary to hold element attributes.
+            attributes['class'] (list): A list to hold class names.
+            attributes['style'] (list): A list to hold style definitions.
+            attributes[other] : Other attributes as key-value pairs.
+        internal (list): A list to hold internal elements or text.
+        indent (str): The string used for indentation in the generated HTML.
+        start_string (str): The starting tag of the element.
+        end_string (str): The ending tag of the element.
+
+    Sub Attributes:
+        The following attributes are optional and can be set during initialization but are moved to the attributes dictionary:
+            - autofocus
+            - accesskey
+            - contenteditable
+            - dir
+            - draggable
+            - hidden
+            - id
+            - lang
+            - spellcheck
+            - tabindex
+            - title
+            - translate
+            - Any additional attributes passed via kwargs
+
+    Methods:
+        add_class(class_obj): Adds a class or classes to the element.
+        add_style(style_obj): Adds a style attribute to the element.
+        add_element(obj): Adds an internal element to the current element.
+        return_document: Generates the HTML representation of the element.
+        return_string_version: Returns the full HTML string representation of the element.
+        text: Returns just the text content of the element, excluding any HTML tags.
+
+    Example:
+        div = Div(id="main", class_="container")
+        div.add_class(["new-class", "another-class"])
+        div.add_style("color: red; font-size: 14px;")
+        div.add_element(Paragraph("Hello, World!"))
+        html_output = div.return_string_version
+    """
+
     def __init__(
         self,
         autofocus=None,
@@ -76,13 +140,36 @@ class Base:
         self.end_string = None
 
     def add_class(self, class_obj):
+        """
+        `Adds a class or classes to the element.
+
+        Args:
+            class_obj (str or list): A string representing a single class name
+                                     or a list of class names to be added.
+
+        Returns:
+            self: Returns the current instance of the element for method chaining.
+        """
+
         if isinstance(class_obj, list):
             self.attributes['class'].extend(class_obj)
         else:
             self.attributes['class'].append(class_obj)
         return self
 
-    def add_style(self, style_obj):
+    def add_style(self, style_obj: Style | str | list):
+        """
+        Adds a style attribute to the element.
+
+        Args:
+            style_obj (Style or str or list): A Style instance, a string of CSS styles
+                                              (e.g., "color: red; font-size: 14px;"),
+                                              or a list of such strings or Style instances.
+
+        Returns:
+            self: Returns the current instance of the element for method chaining.
+        """
+
         if isinstance(style_obj, str):
             style_obj_list = []
             for obj in style_obj.split(';'):
@@ -97,12 +184,31 @@ class Base:
             self.attributes['style'].append(obj)
         return self
 
-    def add_element(self, obj):
+    def add_element(self, obj: Any):
+        """
+        Adds an internal element to the current element.
+
+        Args:
+            obj: The internal element to be added. Can be a string, another Base instance,
+                    or a TextFormat instance.
+
+        Returns:
+            self: Returns the current instance of the element for method chaining.
+        """
+
         self.internal.append(obj)
         return self
 
     @property
     def return_document(self):
+        """
+        Generates the HTML representation of the element, including tags,
+        attributes, and internal content.
+
+        Returns:
+            list: A list of strings representing the HTML lines of the element.
+        """
+
         details = [f'<{self.start_string}']
         for attribute, att_data in self.attributes.items():
             if attribute == 'class':
@@ -169,11 +275,26 @@ class Base:
 
     @property
     def return_string_version(self):
+        """
+        Returns the full HTML string representation of the element,
+        including tags and attributes on one line.
+
+        Returns:
+            str: The full HTML string representation of the element.
+        """
+
         details = self.return_document
         return ''.join([l.strip() for l in details])
 
     @property
     def text(self):
+        """
+        Returns just the text content of the element, excluding any HTML tags.
+
+        Returns:
+            str: The text content of the element.
+        """
+
         text_l = []
         for item in self.internal:
             if not isinstance(item, (Base, TextFormat)):

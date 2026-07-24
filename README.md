@@ -16,6 +16,16 @@ Installing using `pip`
 pip install https://github.com/aecobb53/phtml
 ```
 
+Or in a requirements file
+```text
+git+https://github.com/aecobb53/phtml
+```
+
+You can also specify a branch
+```text
+git+https://github.com/aecobb53/phtml@main
+```
+
 # Document Object
 
 The primary phtml object is called a Document. This in reference to html documents. An understainding of HTML is very useful in understanding the lib.
@@ -95,6 +105,7 @@ You can add style objects directly to an Element, to the Document itself, or loa
 ```python
 style_obj = Style()
 style_obj = Style(style_details={'color': 'pink'})
+
 content_list = style_obj.return_content
 content_string = style_obj.return_string_version
 ```
@@ -115,6 +126,7 @@ content_string = style_obj.return_string_version
 
 ```python
 style_obj = Style(style_details={'color': 'pink', 'size': '60%'}, name='div a .example')
+
 content_list = style_obj.return_content
 content_string = style_obj.return_string_version
 ```
@@ -167,7 +179,7 @@ html_details = doc.return_document
 
 ## scripts
 
-Im not great with JS or TS so this will be built out one day but it will be similar to the styles in that it can be applied to Elements directly or to the entire Document
+Javascript scripts are saved as a list of strings and then gets combined back into a code block in a final output.
 
 ## indent
 
@@ -195,6 +207,24 @@ element.add_element(obj=Header(level=1, internal='Imbedded Header'))
 
 `return_document` on any Element object instead returns a list of contents that make up the Element. You can get straight html with `return_string_version`. You can also get just the text with `text`.
 
+## Loading CSS Files
+
+You can load a css file using the `load_css_file`
+
+```python
+doc = Document()
+doc.load_css_file('<file_path>')
+```
+
+## Loading JS Files
+
+You can load a js file using the `load_js_file`
+
+```python
+doc = Document()
+doc.load_js_file('<file_path>')
+```
+
 ## Parsing files
 
 `HtmlReader` is used to read html, css, and eventually JS/TS files. 
@@ -208,29 +238,3 @@ functions:
 ## Finding Elements
 
 You can use `FindElement` to search for element types. Each search will return every Element that matches the search and all content within it. This can make nesting rather odd, but if you know what youre looking for, it works well.
-
-
-
-
-
-
-TODO: 
-- [X] Add classes
-    - [X] Comment
-    - [X] Form
-    - [X] Table
-- [X] If attribute value is None, reutrn just the key like button's autofocus
-- [ ] Look into adding style references
-    (descendant, child, adjacent, general)
-- [X] Verify html_parser reads text_alterations like bold
-- [X] Verify each class has the appropriate parameters in the init
-- [X] Integrate scripts
-    - [ ] Learn more about JS/TS
-    - [X] Implement script adding
-
-
-
-
-
-
-

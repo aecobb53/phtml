@@ -89,22 +89,25 @@ class HtmlReader:
                 loop_active = False
         if is_document:
             # Assuming the contents is a list of a single element that is a html tag
-            kwargs = {}
+
+            kwargs = {
+                "head": None,
+                "body": None,
+                "styles": [],
+                "scripts": [],
+            }
             internal_html = Html()
             for i in contents[0].internal:
                 if isinstance(i, Head):
                     kwargs['head'] = i
-                    internal_html.add_element(i)
                 elif isinstance(i, Body):
                     kwargs['body'] = i
-                    internal_html.add_element(i)
                 elif isinstance(i, Style):
-                    kwargs['styles'] = i
-                    internal_html.add_style(i)
+                    kwargs['styles'].append(i)
                 elif isinstance(i, Script):
-                    kwargs['scripts'] = i
-                    internal_html.add_element(i)
-            contents = [Document(html=internal_html)]
+                    kwargs['scripts'].append(i)
+            kwargs = {k: v for k, v in kwargs.items() if v}
+            contents = [Document(**kwargs)]
         return contents
 
     def find_next_element(self, remaining_content, current_content='', current_element=None):

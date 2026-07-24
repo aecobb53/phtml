@@ -166,14 +166,14 @@ def test_simple_objects():
     print(f"BODY: [{body}]")
     for index, el in enumerate(body):
         print(f"INDEX: [{index}], EL: [{el}]")
-        if type(el) != type(doc.html.internal[1].internal[index]):
+        if type(el) != type(doc.body.internal[index]):
             print('')
             print(f"-{el}-")
-            print(f'Expected type: {type(doc.html.internal[1].internal[index])}')
+            print(f'Expected type: {type(doc.body.internal[index])}')
             print(f'Got type: {type(el)}')
             print('')
             print('Expected details')
-            print(f"[{doc.html.internal[1].internal[index].__dict__}]")
+            print(f"[{doc.body.internal[index].__dict__}]")
             print('Got details')
 
 def test_load_css_file():
